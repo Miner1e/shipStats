@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="module" src="script.js" charset="utf-8"></script>
+
+    <meta charset="utf-8">
+    <title>
+      Ship Stats
+    </title>
+  </head>
+  <body>
+    <div class="menu">
+      <span>datei</span>
+      <span>optionen</span>
+    </div>
+    <div class=ship_select>
+      <table class="ship_select">
+          <tr id="ship_select_body">
+              <td id="ship_select_tab" class="buy_ship_page ship_select_tab ship_select_tab_active">Schiff kaufen</td>
+          </tr>
+      </table>
+    </div>
+    <div id=ship_stats_body class="ship_stats_body">
+      <div id="buy_ship_page" class="ship_stats ship_stats_active">
+        <select id="ship_type">
+          <option value="" selected disabled hidden>Schiff auswählen</option>
+          <option value="merchant_pinnance" autocomplete="off">Handelsspinassschiff</option>
+          <option value="brigantine" autocomplete="off">Brigantine</option>
+          <option value="frigate" autocomplete="off">Fregatte</option>
+          <option value="galleon" autocomplete="off">Galeone</option>
+          <option value="cannon_brigantine" autocomplete="off">Kanonenbrigantine</option>
+          <option value="war_pinnance_big" autocomplete="off">Kriegsspinasse groß</option>
+          <option value="war_pinnance_small" autocomplete="off">Kriegsspinasse klein</option>
+
+        </select>
+        <span id="buy_ship" style="user-select: none; cursor: pointer;">Schiff Kaufen</span>
+      </div>
+
+    </div>
+
+    <div id="card_insert" class="card_insert">
+        <img id="card" class="card badCannon" src="./pictures/cards/cannons/cannon_exmpl.png" height="100%">
+        <img id="card" class="card goodCannon" src="./pictures/cards/cannons/cannon_exmpl.png" height="100%">
+        <img id="card" class="card prettyGoodCannon" src="./pictures/cards/cannons/cannon_exmpl.png" height="100%">
+    </div>
+  </body>
+</html>

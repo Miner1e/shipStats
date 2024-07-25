@@ -1,0 +1,88 @@
+body {
+  font-family: Arial,Helvetica,sans-serif;
+  margin: 0 0 0 0;
+  background-color: #21252B;
+}
+
+.ship_select{
+  width: 100%;
+  table-layout: fixed;
+
+}
+.ship_select_tab{
+  width: auto;
+  text-align: center;
+  background-color: grey;
+  border-style: solid;
+  border-color: black;
+  cursor: pointer;
+  user-select: none;
+}
+.ship_select_tab_active{
+  border-bottom-style: none;
+}
+.ship_stats{
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  display: none;
+}
+.ship_stats_active{
+  display: block;
+}
+.ship_stats_body{
+  width: 100%;
+  height: 100%;
+}
+.card_slot{
+  cursor: url("./pictures/cursors/pick_up_card.png"), move;
+}
+.card_insert{
+  width: 100%;
+  height: 30%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  background-color: black;
+  display: none;
+}
+.card{
+  cursor:  url("./pictures/cursors/pick_up_card.png"), move;
+}
+.card_active{
+  position: relative;
+  bottom: 5px;
+  animation: card_active_animation 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes card_active_animation {
+  0% {bottom: 0px;}
+  50% {bottom: 10px;}
+  100% {bottom: 0px;}
+}
+.values {
+  font-size: 100%;
+  text-align: center;
+  width: 25%;
+  user-select: none;
+}
+.values_table{
+  width: 100%;
+  height: 40px;
+  border: solid #726454;
+  table-layout: fixed;
+}
+.values_table_row{
+  width: 100%;
+  height: 100%;
+}
+.inline{
+  display: inline-block;
+}
+.hull{
+  table-layout: fixed;
+}
+.hull_elements{
+  text-align: center;
+  width: 20%;
+}
