@@ -1,11 +1,11 @@
 {
     "merchant_pinnance": {
         "hull": {
-          "total": 80,
-          "bow": 65,
-          "stern": 65,
-          "port": 65,
-          "starbord": 65
+          "total": 10,
+          "bow": 4,
+          "stern": 4,
+          "port": 6,
+          "starbord": 6
         },
         "penetration": {
           "bow": 0,
@@ -54,11 +54,11 @@
     },
     "brigantine": {
       "hull": {
-        "total": 80,
-        "bow": 65,
-        "stern": 65,
-        "port": 65,
-        "starbord": 65
+        "total": 8,
+        "bow": 4,
+        "stern": 4,
+        "port": 5,
+        "starbord": 5
       },
       "penetration": {
         "bow": 0,
@@ -98,11 +98,11 @@
   },
   "cannon_brigantine": {
     "hull": {
-      "total": 80,
-      "bow": 65,
-      "stern": 65,
-      "port": 65,
-      "starbord": 65
+      "total": 11,
+      "bow": 4,
+      "stern": 4,
+      "port": 7,
+      "starbord": 7
     },
     "penetration": {
       "bow": 0,
@@ -155,8 +155,8 @@
   "gallion": {
     "hull": {
       "total": 8,
-      "bow": 4,
-      "stern": 4,
+      "bow": 3,
+      "stern": 3,
       "port": 4,
       "starbord": 4
     },
@@ -199,11 +199,11 @@
   },
   "frigate": {
     "hull": {
-      "total": 80,
-      "bow": 65,
-      "stern": 65,
-      "port": 65,
-      "starbord": 65
+      "total": 13,
+      "bow": 5,
+      "stern": 5,
+      "port": 9,
+      "starbord": 9
     },
     "penetration": {
       "bow": 0,
@@ -257,11 +257,11 @@
   },
   "man_of_war": {
     "hull": {
-      "total": 80,
-      "bow": 65,
-      "stern": 65,
-      "port": 65,
-      "starbord": 65
+      "total": 21,
+      "bow": 7,
+      "stern": 7,
+      "port": 16,
+      "starbord": 16
     },
     "penetration": {
       "bow": 0,
@@ -304,19 +304,9 @@
         "empty",
         "empty",
         "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
         "empty"
       ],
       "starbord":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
         "empty",
         "empty",
         "empty",
