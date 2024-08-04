@@ -1,0 +1,24 @@
+{
+    "merchant_pinnance": "Merchantpinnace",
+    "brigantine": "Brigantine",
+    "frigate": "frigate",
+    "gallion": "Gallion",
+    "cannon_brigantine": "Cannon Brigantine",
+    "war_pinnance_big": "Big Warpinnace",
+    "war_pinnance_small": "Small Warpinnace",
+    "man_of_war": "Man of War",
+
+    "hull": "Wall thickness",
+    "penetration": "Penetration",
+    "total": "Total",
+    "bow": "Bow",
+    "stern": "Stern",
+    "starbord": "Starboard",
+    "port": "Port",
+    "cannons": "Cannons",
+    "storage": "Storage",
+    "crew": "Crew",
+    "ship": "Ship",
+
+    "selectShip": "select ship"
+  }

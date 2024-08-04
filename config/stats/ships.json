@@ -1,0 +1,339 @@
+{
+    "merchant_pinnance": {
+        "hull": {
+          "total": 80,
+          "bow": 65,
+          "stern": 65,
+          "port": 65,
+          "starbord": 65
+        },
+        "penetration": {
+          "bow": 0,
+          "stern": 0,
+          "port": 0,
+          "starbord": 0
+        },
+        "storage": [
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty",
+            "empty"
+        ],
+        "crew":[
+          "empty",
+          "empty",
+          "empty"
+        ],
+        "cannons": {
+          "bow": [
+            "empty"
+          ],
+          "stern": [
+            "empty"
+          ],
+          "port":[
+            "empty",
+            "empty",
+            "empty",
+            "empty"
+          ],
+          "starbord":[
+            "empty",
+            "empty",
+            "empty",
+            "empty"
+          ]
+
+        }
+    },
+    "brigantine": {
+      "hull": {
+        "total": 80,
+        "bow": 65,
+        "stern": 65,
+        "port": 65,
+        "starbord": 65
+      },
+      "penetration": {
+        "bow": 0,
+        "stern": 0,
+        "port": 0,
+        "starbord": 0
+      },
+      "storage": [
+          "empty",
+          "empty",
+          "empty"
+      ],
+      "crew":[
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "cannons": {
+        "bow": [
+          "empty"
+        ],
+        "stern": [
+          "empty"
+        ],
+        "port":[
+          "empty",
+          "empty",
+          "empty"
+        ],
+        "starbord":[
+          "empty",
+          "empty",
+          "empty"
+        ]
+
+      }
+  },
+  "cannon_brigantine": {
+    "hull": {
+      "total": 80,
+      "bow": 65,
+      "stern": 65,
+      "port": 65,
+      "starbord": 65
+    },
+    "penetration": {
+      "bow": 0,
+      "stern": 0,
+      "port": 0,
+      "starbord": 0
+    },
+    "storage": [
+        "empty",
+        "empty",
+        "empty"
+    ],
+    "crew":[
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "cannons": {
+      "bow": [
+        "empty",
+        "empty"
+      ],
+      "stern": [
+        "empty",
+        "empty"
+      ],
+      "port":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "starbord":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ]
+
+    }
+  },
+  "gallion": {
+    "hull": {
+      "total": 80,
+      "bow": 65,
+      "stern": 65,
+      "port": 65,
+      "starbord": 65
+    },
+    "penetration": {
+      "bow": 0,
+      "stern": 0,
+      "port": 0,
+      "starbord": 0
+    },
+    "storage": [
+        "empty",
+        "empty",
+        "empty"
+    ],
+    "crew":[
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "cannons": {
+      "bow": [
+        "empty"
+      ],
+      "stern": [
+      ],
+      "port":[
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "starbord":[
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ]
+
+    }
+  },
+  "frigate": {
+    "hull": {
+      "total": 80,
+      "bow": 65,
+      "stern": 65,
+      "port": 65,
+      "starbord": 65
+    },
+    "penetration": {
+      "bow": 0,
+      "stern": 0,
+      "port": 0,
+      "starbord": 0
+    },
+    "storage": [
+        "empty",
+        "empty",
+        "empty"
+    ],
+    "crew":[
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "cannons": {
+      "bow": [
+        "empty"
+      ],
+      "stern": [
+        "empty"
+      ],
+      "port":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "starbord":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ]
+
+    }
+  },
+  "man_of_war": {
+    "hull": {
+      "total": 80,
+      "bow": 65,
+      "stern": 65,
+      "port": 65,
+      "starbord": 65
+    },
+    "penetration": {
+      "bow": 0,
+      "stern": 0,
+      "port": 0,
+      "starbord": 0
+    },
+    "storage": [
+        "empty",
+        "empty",
+        "empty"
+    ],
+    "crew":[
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "cannons": {
+      "bow": [
+        "empty",
+        "empty"
+      ],
+      "stern": [
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "port":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "starbord":[
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ]
+
+    }
+  }
+}

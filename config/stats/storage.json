@@ -1,0 +1,17 @@
+{
+    "gold":{
+        "price": 10
+    },
+    "iron":{
+        "price": 10
+    },
+    "coal":{
+        "price": 10
+    },
+    "logs":{
+        "price": 10
+    },
+    "medicine":{
+        "price": 10
+    }
+}

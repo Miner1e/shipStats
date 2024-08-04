@@ -1,0 +1,24 @@
+{
+    "merchant_pinnance": "Handelspinassschiff",
+    "brigantine": "Brigantine",
+    "frigate": "Fregatte",
+    "gallion": "Galeone",
+    "cannon_brigantine": "Kanonenbrigantine",
+    "war_pinnance_big": "Kriegspinasse groß",
+    "war_pinnance_small": "Kriegspinasse klein",
+    "man_of_war": "Schlachtschiff",
+
+    "hull": "Wandstärke",
+    "penetration": "Durchschlagskraft",
+    "total": "Gesamt",
+    "bow": "Bug",
+    "stern": "Heck",
+    "starbord": "Steuerbord",
+    "port": "Backbord",
+    "cannons": "Kanonen",
+    "storage": "Lagerraum",
+    "crew": "Besatzung",
+    "ship": "Schiff",
+
+    "selectShip": "Schiff auswählen"
+  }

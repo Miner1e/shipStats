@@ -1,0 +1,19 @@
+{
+    "swivel_cannon": {
+        "price": {
+            "iron": 20,
+            "gold": 10,
+            "wood": 2
+        },
+        "range": 20,
+        "damage": 10 
+    },
+    "ranged_cannon": {
+        "price": {
+            "iron": 20,
+            "medicine": 10
+        },
+        "range": 20,
+        "damage": 10 
+    }
+}
