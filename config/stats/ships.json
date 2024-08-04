@@ -154,11 +154,11 @@
   },
   "gallion": {
     "hull": {
-      "total": 80,
-      "bow": 65,
-      "stern": 65,
-      "port": 65,
-      "starbord": 65
+      "total": 8,
+      "bow": 4,
+      "stern": 4,
+      "port": 4,
+      "starbord": 4
     },
     "penetration": {
       "bow": 0,
