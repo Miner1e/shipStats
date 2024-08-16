@@ -89,7 +89,7 @@ document.addEventListener("click", function (e){
           selection.appendChild(img);
         }
         for(const item in pool){
-          img = document.createElement("img");
+          let img = document.createElement("img");
           img.src = "./pictures/cards/" + reciever + "/" + item + ".png";
           img.id = "card";
           img.classList.add("card");
