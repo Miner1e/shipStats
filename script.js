@@ -79,6 +79,7 @@ document.addEventListener("click", function (e){
         let selection = document.getElementById("card_insert");
         selection.style.display = "block";
         if(reciever != "cannons"){
+          console.log("cannons");
           let img = document.createElement("img");
           img.src = "./pictures/cards/empty.png";
           img.id = "card";
