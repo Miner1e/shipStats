@@ -1,0 +1,10 @@
+{
+    "bullet_shot":{
+        "price": 1,
+        "max_storage": 25
+    },
+    "lead_shot":{
+        "price": 0.5,
+        "max_storage": 25
+    }
+}

@@ -13,12 +13,27 @@
     "total": "Total",
     "bow": "Bow",
     "stern": "Stern",
-    "starbord": "Starboard",
+    "starboard": "Starboard",
     "port": "Port",
     "cannons": "Cannons",
     "storage": "Storage",
     "crew": "Crew",
     "ship": "Ship",
 
-    "selectShip": "select ship"
+    "selectShip": "select ship",
+    "currencies": "Currencies",
+    "money": "Dukaten oder so",
+    "cumulative": "Gesamt",
+
+    "log": "Logs",
+    "cotton": "Cotton",
+    "Fruits": "Tropical Fruits",
+    "linen": "Linen",
+    "iron": "Iron",
+    "rum": "Rum",
+    "medicine": "Medicine",
+    "gold": "Gold",
+
+    "lead_shot": "Lead shots",
+    "bullet_shot": "Bullets"
   }

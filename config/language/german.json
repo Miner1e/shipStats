@@ -13,12 +13,28 @@
     "total": "Gesamt",
     "bow": "Bug",
     "stern": "Heck",
-    "starbord": "Steuerbord",
+    "starboard": "Steuerbord",
     "port": "Backbord",
     "cannons": "Kanonen",
     "storage": "Lagerraum",
     "crew": "Besatzung",
     "ship": "Schiff",
 
-    "selectShip": "Schiff auswählen"
+    "selectShip": "Schiff auswählen",
+    "currencies": "Währungen",
+    "money": "Dukaten",
+    "cumulative": "Gesamt",
+    "remaining": "Übrig",
+
+    "log": "Holz",
+    "cotton": "Baumwolle",
+    "fruits": "Südfrüchte",
+    "linen": "Leinen",
+    "iron": "Eisen",
+    "rum": "Rum",
+    "medicine": "Medizin",
+    "gold": "Gold",
+
+    "lead_shot": "Schrotmunition",
+    "bullet_shot": "Kugelmunition"
   }

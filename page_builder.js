@@ -1,5 +1,6 @@
 import {read} from "./util.js";
 let shipStartValue = await read("./config/stats/ships.json");
+let ammunition = await read("./config/stats/ammunition.json");
 
 function page_builder (shipType, language, shipCount) {
   let data = structuredClone(shipStartValue[shipType]);
@@ -40,7 +41,8 @@ function page_builder (shipType, language, shipCount) {
     let slot = document.createElement("td");
     hullList.children[1].appendChild(slot);
     slot.className = "hull_elements";
-    slot.appendChild(document.createElement("table"));
+    slot.appendChild(adjustBuilder("hull_" + stat, data.hull[stat]));
+    /*slot.appendChild(document.createElement("table"));
     slot.children[0].className = "values_table hull_" + stat
 
 
@@ -62,34 +64,95 @@ function page_builder (shipType, language, shipCount) {
     adjustRow.children[2].id = "plus";
     adjustRow.children[2].className = "values";
     adjustRow.children[2].style = "cursor: url('./pictures/cursors/plus.png'), pointer;;";
-    adjustRow.children[2].textContent = "+";
+    adjustRow.children[2].textContent = "+";*/
   });
   leftSide.appendChild(document.createElement("h2"));
-  leftSide.children[leftSide.children.length-1].textContent = language.cannons;  
-
-  leftSide.appendChild(document.createElement("table"));
-  leftSide.children[leftSide.children.length-1].className = "hull";
-  
-  let cannonList = document.createElement("tr");
-  leftSide.children[leftSide.children.length-1].appendChild(cannonList);
-  cannonList.style = "height: 100%; text-align: center";
-  cannonList.classList = "cannons";
-
-
-  for(let spot in data.cannons){
-    cannonList.appendChild(document.createElement("td"));
-    cannonList.children[cannonList.children.length-1].style = "width: 1%";
-    data.cannons[spot].forEach((cannon, i) => {
-      cannonList.appendChild(document.createElement("td"));
-      cannonList.children[cannonList.children.length-1].style = "width: " + 97/data.cannons.length + "%;";
-      let cannonImage = document.createElement("img");
-      cannonList.children[cannonList.children.length-1].appendChild(cannonImage);
-      cannonImage.id = "card_slot";
-      cannonImage.className = "card_slot " + spot + "_" + (i + 1);
-      cannonImage.src = "./pictures/cards/cannons/empty.png";
-      cannonImage.style.width = "100%";
-    });
+  leftSide.children[leftSide.children.length-1].textContent = language.cannons; 
+  const ammoSelect = document.createElement("select");
+  leftSide.appendChild(ammoSelect);
+  ammoSelect.id = "ammoSelect_ship_" + shipCount;
+  for(const shot in ammunition){
+    ammoSelect.appendChild(document.createElement("option"));
+    ammoSelect.children[ammoSelect.children.length-1].textContent = language[shot];
+    ammoSelect.children[ammoSelect.children.length-1].value = shot;
   }
+  leftSide.appendChild(document.createElement("span"));
+  leftSide.children[leftSide.children.length-1].textContent = language.remaining + ": " + ammunition[ammoSelect.value].max_storage; 
+  leftSide.children[leftSide.children.length-1].id = "ammoShow_ship_" + shipCount;
+
+
+  let cannonDiv = document.createElement("div");
+  leftSide.appendChild(cannonDiv);
+  let cannonGrid = document.createElement("table");
+  cannonDiv.appendChild(cannonGrid)
+  let row = document.createElement("tr");
+  row.className = "cannons";
+  cannonGrid.appendChild(row);
+  for(let i in data.cannons.bow){
+    let cannonImage = document.createElement("img");
+    row.appendChild(cannonImage);
+    cannonImage.id = "card_slot";
+    cannonImage.className = "card_slot bow_" + (JSON.parse(i) + 1);
+    cannonImage.src = "./pictures/cards/cannons/empty.png";
+    cannonImage.style.width = 90/(data.cannons.port.length/data.shipLength) + "%";
+  }
+  row.appendChild(document.createElement("img"));
+  row.children[row.children.length-1].src = "./pictures/cards/shipSlots.png";
+  row.children[row.children.length-1].id = "shoot";
+  row.children[row.children.length-1].className = "bow";
+  for(let j = 0; j<data.shipLength; j++){
+    row = document.createElement("tr");
+    row.className = "cannons";
+    cannonGrid.appendChild(row);
+    row.appendChild(document.createElement("td"));
+    row.children[0].style.width = "45%"
+    row.children[0].style.textAlign = "center";
+    for(let i = 0; i<data.cannons.port.length/3; i++){
+      let cannonImage = document.createElement("img");
+      row.children[0].appendChild(cannonImage);
+      cannonImage.id = "card_slot";
+      cannonImage.className = "card_slot port_" + (JSON.parse(i) + 1);
+      cannonImage.src = "./pictures/cards/cannons/empty.png";
+      cannonImage.style.width = 100/(data.cannons.port.length/data.shipLength) + "%";
+    }
+    row.children[0].appendChild(document.createElement("img"));
+
+    row.appendChild(document.createElement("td"));
+
+    row.children[1].style.width = "10%"
+    row.children[1].style.textAlign = "center";
+    row.children[1].appendChild(document.createElement("img"));
+    row.children[1].children[0].src = "./pictures/cards/shipSlots.png";
+    row.children[1].children[0].id = "shoot";
+    row.children[1].children[0].className = "sides";
+    row.children[1].children[0].style.width = "100%";
+    row.appendChild(document.createElement("td"));
+    row.children[2].style.width = "45%"
+    row.children[2].style.textAlign = "center";
+    for(let i = 0; i<data.cannons.starboard.length/3; i++){
+      let cannonImage = document.createElement("img");
+      row.children[2].appendChild(cannonImage);
+      cannonImage.id = "card_slot";
+      cannonImage.className = "card_slot starboard_" + (JSON.parse(i) + 1);
+      cannonImage.src = "./pictures/cards/cannons/empty.png";
+      cannonImage.style.width = 100/(data.cannons.starboard.length/data.shipLength) + "%";
+    }
+  }
+  row = document.createElement("tr");
+  row.className = "cannons";
+  cannonGrid.appendChild(row);
+  for(let i in data.cannons.stern){
+    let cannonImage = document.createElement("img");
+    row.appendChild(cannonImage);
+    cannonImage.id = "card_slot";
+    cannonImage.className = "card_slot stern_" + (JSON.parse(i) + 1);
+    cannonImage.src = "./pictures/cards/cannons/empty.png";
+    cannonImage.style.width = 90/(data.cannons.port.length/data.shipLength) + "%";
+  }
+  row.appendChild(document.createElement("img"));
+  row.children[row.children.length-1].src = "./pictures/cards/shipSlots.png";
+  row.children[row.children.length-1].id = "shoot";
+  row.children[row.children.length-1].className = "stern";
   rightSide.appendChild(document.createElement("h2"));
   rightSide.children[rightSide.children.length-1].textContent = language.storage;
   rightSide.appendChild(document.createElement("table"));
@@ -100,17 +163,22 @@ function page_builder (shipType, language, shipCount) {
   supplyList.style = "height: 100%; text-align: center";
   supplyList.classList = "storage";
 
-  for(let spot in data.storage){
+  data.storage.forEach((spot, i) =>{
+    if(i%10==0) {
+      supplyList = document.createElement("tr");
+      rightSide.children[rightSide.children.length-1].appendChild(supplyList);
+      supplyList.style = "height: 100%; text-align: center";
+      supplyList.classList = "storage";
+    }
     supplyList.appendChild(document.createElement("td"));
     supplyList.children[supplyList.children.length-1].style = "width: " + 100/data.storage.length + "%;";
     let itemImage = document.createElement("img");
     supplyList.children[supplyList.children.length-1].appendChild(itemImage);
     itemImage.id = "card_slot";
-    itemImage.className = "card_slot " + spot;
+    itemImage.className = "card_slot " + i;
     itemImage.src = "./pictures/cards/cannons/empty.png";
     itemImage.style.width = "100%";
-
-  }
+  })
 
   rightSide.appendChild(document.createElement("h2"));
   rightSide.children[rightSide.children.length-1].textContent = language.crew;
@@ -122,83 +190,50 @@ function page_builder (shipType, language, shipCount) {
   crewList.style = "height: 100%; text-align: center";
   crewList.classList = "crew";
 
-  for(let spot in data.crew){
+  data.crew.forEach((spot, i) => {
+    if(i%10==0) {
+      crewList = document.createElement("tr");
+      rightSide.children[rightSide.children.length-1].appendChild(crewList);
+      crewList.style = "height: 100%; text-align: center";
+      crewList.classList = "crew";
+    }
     crewList.appendChild(document.createElement("td"));
     crewList.children[crewList.children.length-1].style = "width: " + 100/data.crew.length + "%;";
     let itemImage = document.createElement("img");
     crewList.children[crewList.children.length-1].appendChild(itemImage);
     itemImage.id = "card_slot";
-    itemImage.className = "card_slot " + spot;
+    itemImage.className = "card_slot " + i;
     itemImage.src = "./pictures/cards/cannons/empty.png";
     itemImage.style.width = "100%";
+  })
 
-  }
-
-
-  html += `
-    <div id="ship_` + shipCount + `" class="ship_stats">
-    <div style="width:50%">
-  `
-  Object.keys(data).forEach((item, i) => {
-    if(item == "hull" || item == "penetration"){
-      html += `
-        <h2>` + language[item] + `</h2>
-        <table class="hull">
-        <tr style="height: 50%; text-align: center">
-      `
-      Object.keys(data[item]).forEach((stat, i) => {
-        html += `
-          <td class="hull_elements">` + language[Object.keys(data[item])[i]] + `</td>
-        `
-      })
-      html += `
-        </tr>
-        <tr style="height: 50%">
-      `
-      Object.keys(data[item]).forEach((stat, i) => {
-        html += `
-          <td class="hull_elements">
-            <table class="values_table ` + item + `_`+ stat + `">
-              <tr class="values_table_row">
-                  <td id="minus" class="values" style="cursor:  url('./pictures/cursors/minus.png'), pointer;;">-</td>
-                  <td class="values" style="border: solid #726454; width: 50%;">` + data[item][stat] + `</td>
-                  <td id="plus" class="values" style="cursor:  url('./pictures/cursors/plus.png'), pointer;;">+</td>
-              </tr>
-            </table>
-          </td>
-
-        `
-      });
-      html += `
-        </tr>
-        </table>
-      `
-    } else if(item == "cannons") {
-      html += `
-      <h2>` + language[item] + `</h2>
-      <table class="hull">
-      <tr style="height: 100%; text-align: center">
-      `
-      for(let spot in data.cannons){
-        html += `<td style="width: 1%"></td>`;
-        data.cannons[spot].forEach((cannon, i) => {
-          html += `
-          <td style="width: ` + 97/data[item].length + `%;"><img id="card_slot" class="card_slot ` + spot + `_` + (i + 1) + `" src="./pictures/cards/cannons/empty.png" width="100%"></td>
-          `
-        });
-      }
-
-      html += `
-      </tr>
-      </table>
-      `
-    }
-  });
-  html += `
-    </div>
-    </div>
-  `
+  rightSide.appendChild(document.createElement("h2"));
+  rightSide.children[rightSide.children.length-1].textContent = language.crew;
   return shipPage;
+}
+function adjustBuilder(classification, startingValue){
+  const adjustTable = document.createElement("table");
+  adjustTable.className = "values_table " + classification;
+  let adjustRow = document.createElement("tr");
+  adjustTable.appendChild(adjustRow);
+  adjustRow.className = "values_table_row";
+  adjustRow.appendChild(document.createElement("td"));
+  adjustRow.children[0].id = "minus";
+  adjustRow.children[0].className = "values";
+  adjustRow.children[0].style = "cursor: url('./pictures/cursors/minus.png'), pointer;;";
+  adjustRow.children[0].textContent = "-";
+
+  adjustRow.appendChild(document.createElement("td"));
+  adjustRow.children[1].className = "values";
+  adjustRow.children[1].style = "border: solid #726454; width: 50%;";
+  adjustRow.children[1].textContent = startingValue;
+
+  adjustRow.appendChild(document.createElement("td"));
+  adjustRow.children[2].id = "plus";
+  adjustRow.children[2].className = "values";
+  adjustRow.children[2].style = "cursor: url('./pictures/cursors/plus.png'), pointer;;";
+  adjustRow.children[2].textContent = "+";
+  return adjustTable;
 }
 
 
@@ -210,4 +245,4 @@ function page_builder (shipType, language, shipCount) {
 
 
 
-export { page_builder }
+export { page_builder, adjustBuilder }

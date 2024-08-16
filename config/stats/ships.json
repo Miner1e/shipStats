@@ -1,116 +1,30 @@
 {
-    "merchant_pinnance": {
-        "hull": {
-          "total": 10,
-          "bow": 4,
-          "stern": 4,
-          "port": 6,
-          "starbord": 6
-        },
-        "penetration": {
-          "bow": 0,
-          "stern": 0,
-          "port": 0,
-          "starbord": 0
-        },
-        "storage": [
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty",
-            "empty"
-        ],
-        "crew":[
-          "empty",
-          "empty",
-          "empty"
-        ],
-        "cannons": {
-          "bow": [
-            "empty"
-          ],
-          "stern": [
-            "empty"
-          ],
-          "port":[
-            "empty",
-            "empty",
-            "empty",
-            "empty"
-          ],
-          "starbord":[
-            "empty",
-            "empty",
-            "empty",
-            "empty"
-          ]
-
-        }
+  "merchant_pinnance": {
+    "shipLength": 2,
+    "moventPoints":{
+      "rotation": 3,
+      "bow": 4,
+      "bow_starboard": 3,
+      "starboard": 1,
+      "stern": 1,
+      "port": 1,
+      "bow_port": 3
     },
-    "brigantine": {
-      "hull": {
-        "total": 8,
-        "bow": 4,
-        "stern": 4,
-        "port": 5,
-        "starbord": 5
-      },
-      "penetration": {
-        "bow": 0,
-        "stern": 0,
-        "port": 0,
-        "starbord": 0
-      },
-      "storage": [
-          "empty",
-          "empty",
-          "empty"
-      ],
-      "crew":[
-        "empty",
-        "empty",
-        "empty"
-      ],
-      "cannons": {
-        "bow": [
-          "empty"
-        ],
-        "stern": [
-          "empty"
-        ],
-        "port":[
-          "empty",
-          "empty",
-          "empty"
-        ],
-        "starbord":[
-          "empty",
-          "empty",
-          "empty"
-        ]
-
-      }
-  },
-  "cannon_brigantine": {
     "hull": {
-      "total": 11,
+      "total": 10,
       "bow": 4,
       "stern": 4,
-      "port": 7,
-      "starbord": 7
-    },
-    "penetration": {
-      "bow": 0,
-      "stern": 0,
-      "port": 0,
-      "starbord": 0
+      "port": 6,
+      "starboard": 6
     },
     "storage": [
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
         "empty",
         "empty",
         "empty"
@@ -122,28 +36,18 @@
     ],
     "cannons": {
       "bow": [
-        "empty",
         "empty"
       ],
       "stern": [
-        "empty",
         "empty"
       ],
       "port":[
         "empty",
         "empty",
         "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
         "empty"
       ],
-      "starbord":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
+      "starboard":[
         "empty",
         "empty",
         "empty",
@@ -152,19 +56,23 @@
 
     }
   },
-  "gallion": {
+  "brigantine": {
+    "shipLength": 1,
     "hull": {
       "total": 8,
-      "bow": 3,
-      "stern": 3,
-      "port": 4,
-      "starbord": 4
+      "bow": 4,
+      "stern": 4,
+      "port": 5,
+      "starboard": 5
     },
-    "penetration": {
-      "bow": 0,
-      "stern": 0,
-      "port": 0,
-      "starbord": 0
+    "moventPoints":{
+      "rotation": 2,
+      "bow": 4,
+      "bow_starboard": 3,
+      "starboard": 1,
+      "stern": 1,
+      "port": 1,
+      "bow_port": 3
     },
     "storage": [
         "empty",
@@ -181,149 +89,265 @@
         "empty"
       ],
       "stern": [
+        "empty"
       ],
       "port":[
         "empty",
         "empty",
-        "empty",
         "empty"
       ],
-      "starbord":[
-        "empty",
+      "starboard":[
         "empty",
         "empty",
         "empty"
       ]
 
     }
+},
+"cannon_brigantine": {
+  "shipLength": 1,
+  "hull": {
+    "total": 11,
+    "bow": 4,
+    "stern": 4,
+    "port": 7,
+    "starboard": 7
   },
-  "frigate": {
-    "hull": {
-      "total": 13,
-      "bow": 5,
-      "stern": 5,
-      "port": 9,
-      "starbord": 9
-    },
-    "penetration": {
-      "bow": 0,
-      "stern": 0,
-      "port": 0,
-      "starbord": 0
-    },
-    "storage": [
-        "empty",
-        "empty",
-        "empty"
-    ],
-    "crew":[
-      "empty",
-      "empty",
-      "empty"
-    ],
-    "cannons": {
-      "bow": [
-        "empty"
-      ],
-      "stern": [
-        "empty"
-      ],
-      "port":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty"
-      ],
-      "starbord":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty"
-      ]
-
-    }
+  "moventPoints":{
+    "rotation": "a",
+    "bow": "b",
+    "bow_starboard": "x",
+    "starboard": "y",
+    "stern": "z",
+    "port": 1,
+    "bow_port": 1
   },
-  "man_of_war": {
-    "hull": {
-      "total": 31,
-      "bow": 7,
-      "stern": 7,
-      "port": 16,
-      "starbord": 16
-    },
-    "penetration": {
-      "bow": 0,
-      "stern": 0,
-      "port": 0,
-      "starbord": 0
-    },
-    "storage": [
-        "empty",
-        "empty",
-        "empty"
+  "storage": [
+      "empty",
+      "empty",
+      "empty"
+  ],
+  "crew":[
+    "empty",
+    "empty",
+    "empty"
+  ],
+  "cannons": {
+    "bow": [
+      "empty",
+      "empty"
     ],
-    "crew":[
+    "stern": [
+      "empty",
+      "empty"
+    ],
+    "port":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
       "empty",
       "empty",
       "empty"
     ],
-    "cannons": {
-      "bow": [
-        "empty",
-        "empty"
-      ],
-      "stern": [
-        "empty",
-        "empty",
-        "empty"
-      ],
-      "port":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty"
-      ],
-      "starbord":[
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty",
-        "empty"
-      ]
+    "starboard":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ]
 
-    }
   }
+},
+"gallion": {
+  "shipLength": 2,
+  "hull": {
+    "total": 8,
+    "bow": 3,
+    "stern": 3,
+    "port": 4,
+    "starboard": 4
+  },
+  "moventPoints":{
+    "rotation": 3,
+    "bow": 4,
+    "bow_starboard": 3,
+    "starboard": 1,
+    "stern": 1,
+    "port": 1,
+    "bow_port": 3
+  },
+  "storage": [
+      "empty",
+      "empty",
+      "empty"
+  ],
+  "crew":[
+    "empty",
+    "empty",
+    "empty"
+  ],
+  "cannons": {
+    "bow": [
+      "empty"
+    ],
+    "stern": [
+    ],
+    "port":[
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "starboard":[
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ]
+
+  }
+},
+"frigate": {
+  "shipLength": 2,
+  "hull": {
+    "total": 13,
+    "bow": 5,
+    "stern": 5,
+    "port": 9,
+    "starboard": 9
+  },
+  "moventPoints":{
+    "rotation": 3,
+    "bow": 6,
+    "bow_starboard": 5,
+    "starboard": 1,
+    "stern": 1,
+    "port": 1,
+    "bow_port": 5
+  },
+  "storage": [
+      "empty",
+      "empty",
+      "empty"
+  ],
+  "crew":[
+    "empty",
+    "empty",
+    "empty"
+  ],
+  "cannons": {
+    "bow": [
+      "empty"
+    ],
+    "stern": [
+      "empty"
+    ],
+    "port":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "starboard":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ]
+
+  }
+},
+"man_of_war": {
+  "shipLength": 3,
+  "hull": {
+    "total": 31,
+    "bow": 7,
+    "stern": 7,
+    "port": 16,
+    "starboard": 16
+  },
+  "moventPoints":{
+    "rotation": 3,
+    "bow": 5,
+    "bow_starboard": 4,
+    "starboard": 1,
+    "stern": 1,
+    "port": 1,
+    "bow_port": 4
+  },
+  "storage": [
+      "empty",
+      "empty",
+      "empty"
+  ],
+  "crew":[
+    "empty",
+    "empty",
+    "empty"
+  ],
+  "cannons": {
+    "bow": [
+      "empty",
+      "empty"
+    ],
+    "stern": [
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "port":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "starboard":[
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ]
+
+  }
+}
 }

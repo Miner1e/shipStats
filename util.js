@@ -8,4 +8,10 @@ async function read(path){
         return data;
       })));*/
 }
-export { read };
+function getShipID(element) {
+  while (![...element.classList].includes("ship_stats")) {
+    element = element.parentElement
+  }
+  return element.id
+}
+export { read, getShipID };
