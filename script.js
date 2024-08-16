@@ -75,11 +75,10 @@ document.addEventListener("click", function (e){
         let pool = cannons;
         if(reciever == "storage") pool = storage;
         if(reciever == "crew") pool = crew;
-
+        console.log(reciever);
         let selection = document.getElementById("card_insert");
         selection.style.display = "block";
         if(reciever != "cannons"){
-          console.log("cannons");
           let img = document.createElement("img");
           img.src = "./pictures/cards/empty.png";
           img.id = "card";
