@@ -78,8 +78,15 @@ document.addEventListener("click", function (e){
 
         let selection = document.getElementById("card_insert");
         selection.style.display = "block";
+        let img = document.createElement("img");
+        img.src = "./pictures/cards/empty.png";
+        img.id = "card";
+        img.classList.add("card");
+        img.classList.add("empty");
+        img.style.height = "100%"
+        selection.appendChild(img);
         for(const item in pool){
-          let img = document.createElement("img");
+          img = document.createElement("img");
           img.src = "./pictures/cards/" + reciever + "/" + item + ".png";
           img.id = "card";
           img.classList.add("card");
