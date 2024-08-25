@@ -133,13 +133,13 @@
     "starboard": 10
   },
   "movementPoints":{
-    "rotation": "a",
-    "bow": "b",
-    "bow_starboard": "x",
-    "starboard": "y",
-    "stern": "z",
-    "port": 1,
-    "bow_port": 1
+    "rotation": "2",
+    "bow": "4/2",
+    "bow_starboard": "3/1",
+    "starboard": "1/1",
+    "stern": "1/1",
+    "port": "1/1",
+    "bow_port": "3/1"
   },
   "storage": [
       "empty",
@@ -254,7 +254,7 @@
     "starboard": 12
   },
   "movementPoints":{
-    "rotation": 3,
+    "rotation": 2,
     "bow": "6/3",
     "bow_starboard": "5/2",
     "starboard": "1/1",
