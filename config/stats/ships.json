@@ -28,6 +28,16 @@
         "empty",
         "empty",
         "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
         "empty"
     ],
     "crew":[
@@ -78,6 +88,9 @@
     "storage": [
         "empty",
         "empty",
+        "empty",
+        "empty",
+        "empty",
         "empty"
     ],
     "crew":[
@@ -125,6 +138,7 @@
     "bow_port": 1
   },
   "storage": [
+      "empty",
       "empty",
       "empty",
       "empty"
@@ -188,6 +202,13 @@
   "storage": [
       "empty",
       "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
       "empty"
   ],
   "crew":[
@@ -241,6 +262,7 @@
       "empty"
   ],
   "crew":[
+    "empty",
     "empty",
     "empty",
     "empty"
@@ -299,6 +321,8 @@
     "bow_port": "4/2"
   },
   "storage": [
+      "empty",
+      "empty",
       "empty",
       "empty",
       "empty"
