@@ -54,7 +54,8 @@ async function encodeShip(data){
   }
  // console.log(Number(25).toString(3) + " " + parseInt("1100101", 2));
  console.log(mapping.length);
- return btoa(unescape(encodeURIComponent(binary)));
+ //return btoa(unescape(encodeURIComponent(binary)));
+  return binary;
 }
 function decodeShip(data){
 
