@@ -1,5 +1,5 @@
-import {page_builder, adjustBuilder} from "./page_builder.js";
-import {read, getShipID} from "./util.js";
+import {page_builder, adjustBuilder, drawMovementCanvas} from "./page_builder.js";
+import {read, getShipID, encodeShip, decodeShip } from "./util.js";
 
 let selectedLanguage = "german"
 let shipStartValue = await read("./config/stats/ships.json");
@@ -8,6 +8,7 @@ let storage = await read("./config/stats/storage.json");
 let crew = await read("./config/stats/crew.json");
 let ammunition = await read("./config/stats/ammunition.json");
 let language = await read("./config/language/" + selectedLanguage + ".json");
+let multiplier = 1;
 
 //global variables
 let money = 100;
@@ -41,6 +42,7 @@ document.addEventListener("click", function (e){
       document.getElementById("ship_stats_body").appendChild(page_builder(value, language, shipCount));
       ships["ship_" + shipCount] = structuredClone(shipStartValue[value])
       ships["ship_" + shipCount].name = name;
+      ships["ship_" + shipCount].type = value;
       ships["ship_" + shipCount].ammunition = {}
       for(const shot in ammunition){
         ships["ship_" + shipCount].ammunition[shot] = ammunition[shot].max_storage;
@@ -57,7 +59,7 @@ document.addEventListener("click", function (e){
       break;
     case "plus":
     case "minus":
-      let increase = 1;
+      let increase = multiplier;
       if(e.shiftKey) increase *= 5;
       if(e.ctrlKey) increase *= 10;
       if(e.target.parentElement.parentElement.classList[1] == "money"){
@@ -71,24 +73,29 @@ document.addEventListener("click", function (e){
     case "card_slot":
       if(document.getElementById("card_insert").style.display != "block"){
         const reciever = e.target.parentElement.parentElement.className.split(" ")[0];
-        console.log(reciever, e.target.parentElement.parentElement);
         let pool = cannons;
         if(reciever == "storage") pool = storage;
         if(reciever == "crew") pool = crew;
-        console.log(reciever);
+
         let selection = document.getElementById("card_insert");
         selection.style.display = "block";
-        if(reciever != "cannons"){
-          let img = document.createElement("img");
-          img.src = "./pictures/cards/empty.png";
-          img.id = "card";
-          img.classList.add("card");
-          img.classList.add("empty");
-          img.style.height = "100%"
-          selection.appendChild(img);
-        }
+
+        let priceSelect = document.createElement("div");
+        selection.appendChild(priceSelect);
+        priceSelect.className = "extention";
+        priceSelect.appendChild(document.createElement("div"));
+        priceSelect.children[0].className = "extention";
+        priceSelect.children[0].style.color = "red";
+        priceSelect.children[0].textContent = "hi";
+        let img = document.createElement("img");
+        img.src = "./pictures/cards/empty.png";
+        img.id = "card";
+        img.classList.add("card");
+        img.classList.add("empty");
+        img.style.height = "100%"
+        selection.appendChild(img);
         for(const item in pool){
-          let img = document.createElement("img");
+          img = document.createElement("img");
           img.src = "./pictures/cards/" + reciever + "/" + item + ".png";
           img.id = "card";
           img.classList.add("card");
@@ -114,6 +121,21 @@ document.addEventListener("click", function (e){
       document.getElementById("ammoShow_" + getShipID(e.target)).textContent = language.remaining + ": " + ships[getShipID(e.target)].ammunition[document.getElementById("ammoSelect_" + getShipID(e.target)).value];
 
       break;
+    case "shareShip":
+      let activeShip = ships[getShipID(e.target)];
+      console.log(activeShip);
+      encodeShip(activeShip).then((e) => console.log(e));
+      encodeShip(activeShip).then((e) => alert(e));
+
+      break;
+    case "rotateMovementCanvas":
+      drawMovementCanvas(e.target.parentElement.querySelector("#movementCanvas"), ships[getShipID(e.target)], e.target.innerText.split(" ")[1].split("°")[0]/90+1);
+      console.log(JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90);
+      e.target.innerText = language.movement_points + " " + (JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90)%360 + "° ⟳";
+      break;
+    case "changeMultiplier":
+      multiplier = e.target.className;
+      break;
     default:
     document.getElementById("card_insert").style.display = "none";
     document.getElementById("card_insert").innerHTML = "";
@@ -122,6 +144,11 @@ document.addEventListener("click", function (e){
   }
   document.cookie = JSON.stringify(ships) + "; sameSite=None; Secure"
 })
+document.addEventListener("change", (e) => {
+  if(e.target.id.startsWith("ammoSelect_ship")){
+    document.getElementById("ammoShow_ship_" + e.target.id.split("_")[2]).innerText = language.remaining + ": " + ships["ship_" + e.target.id.split("_")[2]].ammunition[e.target.value];
+  }
+});
 function updateMainPage(){
   const buyPage = document.getElementById("buy_ship_page");
   buyPage.innerHTML = "";
@@ -187,6 +214,19 @@ function updateMainPage(){
       innerList.innerText = language[item] + ": " + cumulativeResources[item];
     }
   }
+  buyPage.appendChild(document.createElement("button"));
+  buyPage.children[buyPage.children.length-1].id = "changeMultiplier";
+  buyPage.children[buyPage.children.length-1].innerText = "1x";
+  buyPage.children[buyPage.children.length-1].classList = "1";
 
+  buyPage.appendChild(document.createElement("button"));
+  buyPage.children[buyPage.children.length-1].id = "changeMultiplier";
+  buyPage.children[buyPage.children.length-1].innerText = "5x";
+  buyPage.children[buyPage.children.length-1].classList = "5";
+
+  buyPage.appendChild(document.createElement("button"));
+  buyPage.children[buyPage.children.length-1].id = "changeMultiplier";
+  buyPage.children[buyPage.children.length-1].innerText = "10x";
+  buyPage.children[buyPage.children.length-1].classList = "10";
 }
 

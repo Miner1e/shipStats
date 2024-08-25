@@ -48,6 +48,7 @@ body {
 }
 .card{
   cursor:  url("./pictures/cursors/pick_up_card.png"), move;
+  position: relative;
 }
 .card_active{
   position: relative;
@@ -85,4 +86,11 @@ body {
 .hull_elements{
   text-align: center;
   width: 20%;
+}
+.extend:hover .extention{
+  display: block;
+}
+.extention{
+  display: none;
+  position: absolute;
 }

@@ -88,9 +88,10 @@ function page_builder (shipType, language, shipCount) {
   let row = document.createElement("tr");
   row.className = "cannons";
   cannonGrid.appendChild(row);
+  row.appendChild(document.createElement("td"));
   for(let i in data.cannons.bow){
     let cannonImage = document.createElement("img");
-    row.appendChild(cannonImage);
+    row.children[row.children.length-1].appendChild(cannonImage);
     cannonImage.id = "card_slot";
     cannonImage.className = "card_slot bow_" + (JSON.parse(i) + 1);
     cannonImage.src = "./pictures/cards/cannons/empty.png";
@@ -107,7 +108,7 @@ function page_builder (shipType, language, shipCount) {
     row.appendChild(document.createElement("td"));
     row.children[0].style.width = "45%"
     row.children[0].style.textAlign = "center";
-    for(let i = 0; i<data.cannons.port.length/3; i++){
+    for(let i = 0; i<data.cannons.port.length/data.shipLength; i++){
       let cannonImage = document.createElement("img");
       row.children[0].appendChild(cannonImage);
       cannonImage.id = "card_slot";
@@ -129,7 +130,7 @@ function page_builder (shipType, language, shipCount) {
     row.appendChild(document.createElement("td"));
     row.children[2].style.width = "45%"
     row.children[2].style.textAlign = "center";
-    for(let i = 0; i<data.cannons.starboard.length/3; i++){
+    for(let i = 0; i<data.cannons.starboard.length/data.shipLength; i++){
       let cannonImage = document.createElement("img");
       row.children[2].appendChild(cannonImage);
       cannonImage.id = "card_slot";
@@ -141,9 +142,10 @@ function page_builder (shipType, language, shipCount) {
   row = document.createElement("tr");
   row.className = "cannons";
   cannonGrid.appendChild(row);
+  row.appendChild(document.createElement("td"));
   for(let i in data.cannons.stern){
     let cannonImage = document.createElement("img");
-    row.appendChild(cannonImage);
+    row.children[row.children.length-1].appendChild(cannonImage);
     cannonImage.id = "card_slot";
     cannonImage.className = "card_slot stern_" + (JSON.parse(i) + 1);
     cannonImage.src = "./pictures/cards/cannons/empty.png";
@@ -208,7 +210,36 @@ function page_builder (shipType, language, shipCount) {
   })
 
   rightSide.appendChild(document.createElement("h2"));
-  rightSide.children[rightSide.children.length-1].textContent = language.crew;
+  rightSide.children[rightSide.children.length-1].textContent = language.movement_points + " 0° ⟳";
+  rightSide.children[rightSide.children.length-1].id = "rotateMovementCanvas"
+
+  const movementCanvas = document.createElement("canvas");
+  rightSide.appendChild(movementCanvas);
+  movementCanvas.style.width = "100%";
+  movementCanvas.id = "movementCanvas";
+
+  drawMovementCanvas(movementCanvas, data, 0);
+
+  const divvy = document.createElement("div");
+  divvy.classList.add("extend");
+  rightSide.appendChild(divvy);
+  divvy.appendChild(document.createElement("div"));
+  divvy.children[0].innerHTML = "<div>hi</div><div>hi</div>";
+  divvy.children[0].className = "extention";
+  divvy.appendChild(document.createElement("h2"));
+  divvy.children[1].textContent = "test";
+  divvy.children[1].className = "extend"
+  divvy.appendChild(document.createElement("div"));
+  divvy.children[2].innerHTML = "<div>hi</div><div>hi</div>";
+  divvy.children[2].className = "extention";
+
+  rightSide.appendChild(document.createElement("h2"));
+  rightSide.children[rightSide.children.length-1].textContent = "schiffTeilen";
+  rightSide.children[rightSide.children.length-1].id = "shareShip";
+  for(let i = 0; i<10; i++){
+    rightSide.appendChild(document.createElement("h2"));
+    rightSide.children[rightSide.children.length-1].textContent = "filler";
+  }
   return shipPage;
 }
 function adjustBuilder(classification, startingValue){
@@ -230,10 +261,36 @@ function adjustBuilder(classification, startingValue){
 
   adjustRow.appendChild(document.createElement("td"));
   adjustRow.children[2].id = "plus";
-  adjustRow.children[2].className = "values";
+  adjustRow.children[2].className = "values extend";
   adjustRow.children[2].style = "cursor: url('./pictures/cursors/plus.png'), pointer;;";
   adjustRow.children[2].textContent = "+";
   return adjustTable;
+}
+function drawMovementCanvas(movementCanvas, data, rotation){
+  const ctx = movementCanvas.getContext("2d");
+  ctx.reset();
+  //ctx.clearRect(0,0, movementCanvas.width, movementCanvas.height);
+  let centerX = movementCanvas.width/2;
+  let centerY = movementCanvas.height/2;
+  ctx.fillText("⟳" + data.movementPoints.rotation, 0, ctx.measureText("⟳" + data.movementPoints.rotation).actualBoundingBoxAscent + ctx.measureText("⟳" + data.movementPoints.rotation).actualBoundingBoxDescent);
+  ctx.translate(centerX, centerY);
+  ctx.rotate(rotation*Math.PI/2);
+  ctx.translate(-centerX, -centerY);
+  ctx.moveTo(centerX-movementCanvas.height*0.75/2, centerY*0.25);
+  ctx.lineTo(centerX, centerY*0.125);
+  ctx.lineTo(centerX+movementCanvas.height*0.75/2, centerY*0.25);
+  ctx.rect(centerX-movementCanvas.height*0.75/2, centerY*0.25, movementCanvas.height*0.75, movementCanvas.height*0.75);
+
+  ctx.fillText(data.movementPoints.bow, centerX-ctx.measureText(data.movementPoints.bow).width/2, centerY*0.125-2);
+  ctx.fillText(data.movementPoints.bow_port, centerX-movementCanvas.height*0.75/2-ctx.measureText(data.movementPoints.bow_port).width-2, centerY*0.25);
+  ctx.fillText(data.movementPoints.bow_starboard, centerX+movementCanvas.height*0.75/2+2, centerY*0.25);
+  ctx.fillText(data.movementPoints.port, centerX-movementCanvas.height*0.75/2-ctx.measureText(data.movementPoints.bow_port).width-2, centerY);
+  ctx.fillText(data.movementPoints.starboard, centerX+movementCanvas.height*0.75/2+2, centerY);
+  ctx.fillText(data.movementPoints.stern, centerX-ctx.measureText(data.movementPoints.stern).width/2, movementCanvas.height*0.875 + 2 + ctx.measureText(data.movementPoints.stern).actualBoundingBoxAscent + ctx.measureText(data.movementPoints.stern).actualBoundingBoxDescent);
+  ctx.stroke();
+  ctx.translate(centerX, centerY);
+  ctx.rotate(-rotation*Math.PI/2);
+  ctx.translate(-centerX, -centerY);
 }
 
 
@@ -244,5 +301,4 @@ function adjustBuilder(classification, startingValue){
 
 
 
-
-export { page_builder, adjustBuilder }
+export { page_builder, adjustBuilder, drawMovementCanvas }
