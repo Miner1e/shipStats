@@ -1,12 +1,12 @@
 {
-    "merchant_pinnance": "Handelspinassschiff",
-    "brigantine": "Brigantine",
+    "brigantine": "Schaluppe",
+    "cannon_brigantine": "Kannonenboot",
     "frigate": "Fregatte",
     "gallion": "Galeone",
-    "cannon_brigantine": "Kanonenbrigantine",
     "war_pinnance_big": "Kriegspinasse groß",
     "war_pinnance_small": "Kriegspinasse klein",
-    "man_of_war": "Schlachtschiff",
+    "merchant_pinnance": "Frachtschiff",
+    "man_of_war": "Schlachtkahn",
 
     "hull": "Wandstärke",
     "penetration": "Durchschlagskraft",
