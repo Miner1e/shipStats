@@ -45,7 +45,7 @@ document.addEventListener("click", function (e){
       ships["ship_" + shipCount].type = value;
       ships["ship_" + shipCount].ammunition = {}
       for(const shot in ammunition){
-        ships["ship_" + shipCount].ammunition[shot] = ammunition[shot].max_storage;
+        ships["ship_" + shipCount].ammunition[shot] = 0;
       }
       shipCount++;
       break;
@@ -135,6 +135,13 @@ document.addEventListener("click", function (e){
       break;
     case "changeMultiplier":
       multiplier = e.target.className;
+      break;
+    case "ammoBuy":
+      if(ships[e.target.className].ammunition.bullet_shot + ships[e.target.className].ammunition.lead_shot >= ships[e.target.className].maxAmmo) return;
+      ships[e.target.className].ammunition[document.getElementById("ammoSelect_" + e.target.className).value]++;
+      money-= ammunition[document.getElementById("ammoSelect_" + e.target.className).value].price;
+      document.getElementById("ammoShow_" + e.target.className).innerText = language.remaining + ": " + ships[e.target.className].ammunition[document.getElementById("ammoSelect_" + e.target.className).value];
+
       break;
     default:
     document.getElementById("card_insert").style.display = "none";

@@ -77,9 +77,13 @@ function page_builder (shipType, language, shipCount) {
     ammoSelect.children[ammoSelect.children.length-1].value = shot;
   }
   leftSide.appendChild(document.createElement("span"));
-  leftSide.children[leftSide.children.length-1].textContent = language.remaining + ": " + ammunition[ammoSelect.value].max_storage; 
+  leftSide.children[leftSide.children.length-1].textContent = language.remaining + ": " + 0; 
   leftSide.children[leftSide.children.length-1].id = "ammoShow_ship_" + shipCount;
 
+  leftSide.appendChild(document.createElement("button"));
+  leftSide.children[leftSide.children.length-1].textContent = " buy 1x"; 
+  leftSide.children[leftSide.children.length-1].id = "ammoBuy";
+  leftSide.children[leftSide.children.length-1].className = "ship_" + shipCount;
 
   let cannonDiv = document.createElement("div");
   leftSide.appendChild(cannonDiv);
@@ -220,7 +224,7 @@ function page_builder (shipType, language, shipCount) {
 
   drawMovementCanvas(movementCanvas, data, 0);
 
-  const divvy = document.createElement("div");
+  /*const divvy = document.createElement("div");
   divvy.classList.add("extend");
   rightSide.appendChild(divvy);
   divvy.appendChild(document.createElement("div"));
@@ -231,7 +235,7 @@ function page_builder (shipType, language, shipCount) {
   divvy.children[1].className = "extend"
   divvy.appendChild(document.createElement("div"));
   divvy.children[2].innerHTML = "<div>hi</div><div>hi</div>";
-  divvy.children[2].className = "extention";
+  divvy.children[2].className = "extention";*/
 
   rightSide.appendChild(document.createElement("h2"));
   rightSide.children[rightSide.children.length-1].textContent = "schiffTeilen";

@@ -1,6 +1,7 @@
 {
   "merchant_pinnance": {
     "shipLength": 2,
+    "maxAmmo": 50,
     "movementPoints":{
       "rotation": 3,
       "bow": "4/2",
@@ -106,6 +107,7 @@
 },
 "cannon_brigantine": {
   "shipLength": 1,
+  "maxAmmo": 50,
   "hull": {
     "total": 11,
     "bow": 4,
@@ -166,6 +168,7 @@
 },
 "gallion": {
   "shipLength": 2,
+  "maxAmmo": 50,
   "hull": {
     "total": 8,
     "bow": 3,
@@ -215,6 +218,7 @@
 },
 "frigate": {
   "shipLength": 2,
+  "maxAmmo": 50,
   "hull": {
     "total": 13,
     "bow": 5,
@@ -277,6 +281,7 @@
 },
 "man_of_war": {
   "shipLength": 3,
+  "maxAmmo": 50,
   "hull": {
     "total": 31,
     "bow": 7,
