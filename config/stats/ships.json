@@ -122,11 +122,11 @@
   "shipLength": 1,
   "maxAmmo": 50,
   "hull": {
-    "total": 11,
+    "total": 18,
     "bow": 4,
     "stern": 4,
-    "port": 7,
-    "starboard": 7
+    "port": 10,
+    "starboard": 10
   },
   "movementPoints":{
     "rotation": "a",
@@ -184,11 +184,11 @@
   "shipLength": 2,
   "maxAmmo": 50,
   "hull": {
-    "total": 8,
+    "total": 9,
     "bow": 3,
     "stern": 3,
-    "port": 4,
-    "starboard": 4
+    "port": 6,
+    "starboard": 6
   },
   "movementPoints":{
     "rotation": 3,
@@ -241,11 +241,11 @@
   "shipLength": 2,
   "maxAmmo": 50,
   "hull": {
-    "total": 13,
+    "total": 22,
     "bow": 5,
     "stern": 5,
-    "port": 9,
-    "starboard": 9
+    "port": 12,
+    "starboard": 12
   },
   "movementPoints":{
     "rotation": 3,
