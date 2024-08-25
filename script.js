@@ -134,7 +134,7 @@ document.addEventListener("click", function (e){
       e.target.innerText = language.movement_points + " " + (JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90)%360 + "° ⟳";
       break;
     case "changeMultiplier":
-      multiplier = e.target.className;
+      multiplier = JSON.parse(e.target.className);
       break;
     case "ammoBuy":
       if(ships[e.target.className].ammunition.bullet_shot + ships[e.target.className].ammunition.lead_shot >= ships[e.target.className].maxAmmo) return;
