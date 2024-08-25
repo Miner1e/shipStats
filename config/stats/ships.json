@@ -43,6 +43,10 @@
     "crew":[
       "empty",
       "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
       "empty"
     ],
     "cannons": {
@@ -214,6 +218,8 @@
   "crew":[
     "empty",
     "empty",
+    "empty",
+    "empty",
     "empty"
   ],
   "cannons": {
@@ -330,6 +336,9 @@
   ],
   "crew":[
     "empty",
+    "empty",
+    "empty",
+    "empty", 
     "empty",
     "empty"
   ],
