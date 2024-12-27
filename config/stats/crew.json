@@ -1,26 +1,34 @@
 {
     "chef":{
-        "health": 6
+        "health": 6,
+        "price": 10
     },
     "helmsman":{
-        "health": 5
+        "health": 5,
+        "price": 20
     },
     "sailor":{
-        "health": 3
+        "health": 3,
+        "price": 20
     },
     "soldier1":{
-        "health": 2
+        "health": 2,
+        "price":  10
     },
     "soldier2":{
-        "health": 4
+        "health": 4,
+        "price": 30
     },
     "soldier3":{
-        "health": 7
+        "health": 7,
+        "price": 70
     },
     "mage":{
-        "health": 4
+        "health": 4,
+        "price": 5
     },
     "cannoneer":{
-        "health": 4
+        "health": 4,
+        "price": 20
     }
 }

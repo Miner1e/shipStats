@@ -1,23 +1,8 @@
 {
-    "gold":{
-        "cheap_price": 30,
-        "medium_price": 40,
-        "expensive_price": 50
-    },
-    "iron":{
-        "cheap_price": 14,
-        "medium_price": 22,
-        "expensive_price": 28
-    },
     "log":{
         "cheap_price": 2,
         "medium_price": 6,
         "expensive_price": 8
-    },
-    "medicine":{
-        "cheap_price": 24,
-        "medium_price": 34,
-        "expensive_price": 42
     },
     "cotton":{
         "cheap_price": 6,
@@ -30,13 +15,28 @@
         "expensive_price": 18
     },
     "linen":{
-        "cheap_price": 6,
-        "medium_price": 9,
-        "expensive_price": 12
+        "cheap_price": 12,
+        "medium_price": 18,
+        "expensive_price": 24
+    },
+    "iron":{
+        "cheap_price": 14,
+        "medium_price": 22,
+        "expensive_price": 28
     },
     "rum":{
         "cheap_price": 20,
         "medium_price": 28,
         "expensive_price": 36
+    },
+    "medicine":{
+        "cheap_price": 24,
+        "medium_price": 34,
+        "expensive_price": 42
+    },
+    "gold":{
+        "cheap_price": 30,
+        "medium_price": 40,
+        "expensive_price": 50
     }
 }
