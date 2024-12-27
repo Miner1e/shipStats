@@ -9,7 +9,7 @@ let crew = await read("./config/stats/crew.json");
 let ammunition = await read("./config/stats/ammunition.json");
 let language = await read("./config/language/" + selectedLanguage + ".json");
 let multiplier = 1;
-
+let selectedPrice = "medium_price";
 //global variables
 let money = 100;
 let shipCount = 1;
@@ -69,6 +69,8 @@ document.addEventListener("click", function (e){
       }
       ships[document.getElementsByClassName("ship_stats_active")[0].id][e.target.parentElement.parentElement.classList[1].split("_")[0]][e.target.parentElement.parentElement.classList[1].split("_")[1]] += (e.target.id == "plus" ? increase : (increase*-1))
       e.target.parentElement.children[1].innerHTML = ships[document.getElementsByClassName("ship_stats_active")[0].id][e.target.parentElement.parentElement.classList[1].split("_")[0]][e.target.parentElement.parentElement.classList[1].split("_")[1]]
+      if(ships[document.getElementsByClassName("ship_stats_active")[0].id][e.target.parentElement.parentElement.classList[1].split("_")[0]][e.target.parentElement.parentElement.classList[1].split("_")[1]] <= 0) e.target.parentElement.children[1].style.backgroundColor = "red"
+      if(ships[document.getElementsByClassName("ship_stats_active")[0].id][e.target.parentElement.parentElement.classList[1].split("_")[0]][e.target.parentElement.parentElement.classList[1].split("_")[1]] > 0) e.target.parentElement.children[1].style.backgroundColor = ""
       break;
     case "card_slot":
       if(document.getElementById("card_insert").style.display != "block"){
@@ -77,22 +79,17 @@ document.addEventListener("click", function (e){
         if(reciever == "storage") pool = storage;
         if(reciever == "crew") pool = crew;
 
+        let priceChoice = document.getElementById("price_choice");
+        priceChoice.style.display = "block"
         let selection = document.getElementById("card_insert");
         selection.style.display = "block";
-
-        let priceSelect = document.createElement("div");
-        selection.appendChild(priceSelect);
-        priceSelect.className = "extention";
-        priceSelect.appendChild(document.createElement("div"));
-        priceSelect.children[0].className = "extention";
-        priceSelect.children[0].style.color = "red";
-        priceSelect.children[0].textContent = "hi";
         let img = document.createElement("img");
         img.src = "./pictures/cards/empty.png";
         img.id = "card";
         img.classList.add("card");
         img.classList.add("empty");
-        img.style.height = "100%"
+        //img.style.height = "100%"
+        img.style.width = "10%"
         selection.appendChild(img);
         for(const item in pool){
           img = document.createElement("img");
@@ -100,7 +97,8 @@ document.addEventListener("click", function (e){
           img.id = "card";
           img.classList.add("card");
           img.classList.add(item);
-          img.style.height = "100%"
+          //img.style.height = "100%"
+          img.style.width = "10%"
           selection.appendChild(img);
         }
       } else if (document.getElementsByClassName("card_active").length != 0) {
@@ -109,6 +107,11 @@ document.addEventListener("click", function (e){
         if(reciever == "cannons"){
           ships[getShipID(e.target)].cannons[e.target.classList[1].split("_")[0]][e.target.classList[1].split("_")[1]-1] = document.getElementsByClassName("card_active")[0].classList[1]
           return;
+        }
+        if(reciever == "storage"){
+          if(document.getElementsByClassName("card_active")[0].classList[1] == "empty") {
+            money += storage[ships[getShipID(e.target)][reciever][e.target.classList[1]]][selectedPrice]
+          } else money -= storage[document.getElementsByClassName("card_active")[0].classList[1]][selectedPrice];
         }
         ships[getShipID(e.target)][reciever][e.target.classList[1]] = document.getElementsByClassName("card_active")[0].classList[1]
       }
@@ -141,10 +144,29 @@ document.addEventListener("click", function (e){
       ships[e.target.className].ammunition[document.getElementById("ammoSelect_" + e.target.className).value]++;
       money-= ammunition[document.getElementById("ammoSelect_" + e.target.className).value].price;
       document.getElementById("ammoShow_" + e.target.className).innerText = language.remaining + ": " + ships[e.target.className].ammunition[document.getElementById("ammoSelect_" + e.target.className).value];
+      break;
+    case "price_high":
+      selectedPrice = "expensive_price";
+      document.getElementById("price_high").style.borderStyle = "solid";
+      document.getElementById("price_medium").style.borderStyle = "none";
+      document.getElementById("price_low").style.borderStyle = "none";
 
+      break;
+    case "price_medium":
+      selectedPrice = "medium_price";
+      document.getElementById("price_medium").style.borderStyle = "solid";
+      document.getElementById("price_high").style.borderStyle = "none";
+      document.getElementById("price_low").style.borderStyle = "none";
+      break;
+    case "price_low":
+      selectedPrice = "cheap_price";
+      document.getElementById("price_low").style.borderStyle = "solid";
+      document.getElementById("price_medium").style.borderStyle = "none";
+      document.getElementById("price_high").style.borderStyle = "none";
       break;
     default:
     document.getElementById("card_insert").style.display = "none";
+    document.getElementById("price_choice").style.display = "none";
     document.getElementById("card_insert").innerHTML = "";
     try {document.getElementsByClassName("card_active")[0].classList.remove("card_active")} catch {}
 

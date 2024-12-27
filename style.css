@@ -46,6 +46,17 @@ body {
   background-color: black;
   display: none;
 }
+.card_price{
+  width: 100%;
+  height: 5%;
+  position: fixed;
+  bottom: 30%;
+  text-align: center;
+  background-color: black;
+  display: none;
+  color: white;
+  user-select: none;
+}
 .card{
   cursor:  url("./pictures/cursors/pick_up_card.png"), move;
   position: relative;
@@ -86,11 +97,4 @@ body {
 .hull_elements{
   text-align: center;
   width: 20%;
-}
-.extend:hover .extention{
-  display: block;
-}
-.extention{
-  display: none;
-  position: absolute;
 }
