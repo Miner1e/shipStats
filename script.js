@@ -164,6 +164,13 @@ document.addEventListener("click", function (e){
       document.getElementById("price_medium").style.borderStyle = "none";
       document.getElementById("price_high").style.borderStyle = "none";
       break;
+    case "removeShip":
+      document.getElementsByClassName("ship_select_tab")[0].classList.add("ship_select_tab_active");
+      for(let tab of document.getElementsByClassName("ship_select_tab")) {
+        if(tab.classList[0]==e.target.className) tab.remove();
+      }
+      document.getElementById(e.target.className).remove();
+      delete ships[e.target.className]
     default:
     document.getElementById("card_insert").style.display = "none";
     document.getElementById("price_choice").style.display = "none";

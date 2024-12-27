@@ -1,14 +1,26 @@
 {
     "chef":{
-
+        "health": 6
     },
     "helmsman":{
-
+        "health": 5
     },
     "sailor":{
-
+        "health": 3
     },
-    "soldier":{
-        
+    "soldier1":{
+        "health": 2
+    },
+    "soldier2":{
+        "health": 4
+    },
+    "soldier3":{
+        "health": 7
+    },
+    "mage":{
+        "health": 4
+    },
+    "cannoneer":{
+        "health": 4
     }
 }

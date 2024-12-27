@@ -244,6 +244,11 @@ function page_builder (shipType, language, shipCount) {
     rightSide.appendChild(document.createElement("h2"));
     rightSide.children[rightSide.children.length-1].textContent = "filler";
   }
+  let del = document.createElement("div");
+  rightSide.appendChild(del);
+  del.innerText = "entfernen";
+  del.id = "removeShip";
+  del.className = "ship_" + shipCount;
   return shipPage;
 }
 function adjustBuilder(classification, startingValue){
