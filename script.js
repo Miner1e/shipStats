@@ -1,5 +1,5 @@
 import {page_builder, adjustBuilder, drawMovementCanvas} from "./page_builder.js";
-import {read, getShipID, encodeShip, decodeShip } from "./util.js";
+import {read, getShipID, encodeShip, decodeShip, cyrb128, sfc32} from "./util.js";
 
 let selectedLanguage = "german"
 let shipStartValue = await read("./config/stats/ships.json");
@@ -10,6 +10,8 @@ let ammunition = await read("./config/stats/ammunition.json");
 let language = await read("./config/language/" + selectedLanguage + ".json");
 let multiplier = 1;
 let selectedPrice = "medium_price";
+let windRand;
+let currentWind = []
 //global variables
 let money = 100;
 let shipCount = 1;
@@ -17,6 +19,8 @@ let ships = {}
 
 updateMainPage();
 
+windRand = generateWindseed(seedInput.value)
+stepWind()
 
 document.addEventListener("load", async function(e){
   ships = document.cookie
@@ -31,6 +35,12 @@ document.addEventListener("click", function (e){
       try{document.getElementsByClassName("ship_stats_active")[0].classList.remove("ship_stats_active");} catch{};
       document.getElementById(e.target.classList[0]).classList.add("ship_stats_active");
       if(document.getElementById(e.target.classList[0]).id == "buy_ship_page") updateMainPage();
+      else {
+        //innerText.split(" ")[1].split("°")[0]/90+1
+        let id = e.target.classList[0].split("_")[1]
+        let element = document.getElementById("movementCanvas_" + id)
+        drawMovementCanvas(element, ships["ship_" + id], element.classList.toString().split(":")[1], currentWind)
+      }
       break;
     case "buy_ship":
       let value = document.getElementById("ship_type").value
@@ -39,7 +49,7 @@ document.addEventListener("click", function (e){
       if(name == "") name = language.ship + " " + shipCount;
       document.getElementById("shipName").placeholder = language.ship + " " + (shipCount + 1);
       document.getElementById("ship_select_body").innerHTML += "<td id='ship_select_tab' class='ship_" + shipCount + " ship_select_tab'>"+ name + " (" + language[document.getElementById("ship_type").value] + ")</td>";
-      document.getElementById("ship_stats_body").appendChild(page_builder(value, language, shipCount));
+      document.getElementById("ship_stats_body").appendChild(page_builder(value, language, shipCount, currentWind));
       ships["ship_" + shipCount] = structuredClone(shipStartValue[value])
       ships["ship_" + shipCount].name = name;
       ships["ship_" + shipCount].type = value;
@@ -132,8 +142,9 @@ document.addEventListener("click", function (e){
 
       break;
     case "rotateMovementCanvas":
-      drawMovementCanvas(e.target.parentElement.querySelector("#movementCanvas"), ships[getShipID(e.target)], e.target.innerText.split(" ")[1].split("°")[0]/90+1);
-      console.log(JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90);
+      drawMovementCanvas(e.target.parentElement.querySelector("#movementCanvas").children[0], ships[getShipID(e.target)], e.target.innerText.split(" ")[1].split("°")[0]/90+1, currentWind);
+      e.target.parentElement.querySelector("#movementCanvas").children[0].className = "rot:" + (e.target.innerText.split(" ")[1].split("°")[0]/90+1)
+      //console.log(JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90);
       e.target.innerText = language.movement_points + " " + (JSON.parse(e.target.innerText.split(" ")[1].split("°")[0]) + 90)%360 + "° ⟳";
       break;
     case "changeMultiplier":
@@ -264,5 +275,66 @@ function updateMainPage(){
   buyPage.children[buyPage.children.length-1].id = "changeMultiplier";
   buyPage.children[buyPage.children.length-1].innerText = "10x";
   buyPage.children[buyPage.children.length-1].classList = "10";
+
+  let seedInput = document.createElement("input")
+  seedInput.value = language.pirate_words[Math.round(Math.random()*language.pirate_words.length-1)]
+  seedInput.id = "seedInput"
+  seedInput.addEventListener("focusout", (e) => {
+    windRand = generateWindseed(seedInput.value)
+  })
+  buyPage.appendChild(seedInput)
+
+  buyPage.appendChild(document.createElement("br"))
+  let windVisual = document.createElement("canvas")
+  windVisual.id = "windVisual"
+  buyPage.appendChild(windVisual)
+  windVisual.style.width = "500px";
+  windVisual.style.height = "500px";
+  windVisual.onclick = stepWind
+
+  let ctx = windVisual.getContext("2d");
+  let centerX = windVisual.width/2
+  let centerY = windVisual.height/2
+
+  ctx.reset()
+
+  ctx.translate(centerX, centerY)
+
+  for(let i = 0; i<360; i+=45) {
+    ctx.fillText(currentWind[i/45], Math.sin(i/180*Math.PI)*centerX*0.9, -centerY*Math.cos(i/180*Math.PI)*0.9)
+    //console.log(Math.min(Math.abs(i-windDir), Math.abs(i-(windDir-360)))*windStrength/180)
+  }
+
+
+
 }
 
+function generateWindseed(textSeed) {
+  let windSeed = cyrb128(textSeed)
+  return sfc32(windSeed[0], windSeed[1], windSeed[2], windSeed[3]);
+}
+function stepWind(){
+  let windDir = windRand()*360
+  let windStrength = windRand()*4+1
+
+
+  let windVisual = document.getElementById("windVisual")
+  let ctx = windVisual.getContext("2d");
+  let centerX = windVisual.width/2
+  let centerY = windVisual.height/2
+
+  ctx.reset()
+
+  ctx.translate(centerX, centerY)
+  /*ctx.moveTo(0,0)
+  ctx.lineTo(Math.sin(windDir/180*Math.PI)*centerX, -centerY*Math.cos(windDir/180*Math.PI));*/
+
+  for(let i = 0; i<360; i+=45) {
+    currentWind[i/45] = Math.round(windStrength-1.5*Math.min(Math.abs(i-windDir), Math.abs(i-(windDir-360)), Math.abs(i-(windDir+360)))*windStrength/180)
+    ctx.fillText(currentWind[i/45], Math.sin(i/180*Math.PI)*centerX*0.9, -centerY*Math.cos(i/180*Math.PI)*0.9)
+    //console.log(Math.min(Math.abs(i-windDir), Math.abs(i-(windDir-360)))*windStrength/180)
+  }
+
+  ctx.stroke()
+
+}

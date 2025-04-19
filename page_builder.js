@@ -1,8 +1,8 @@
-import {read} from "./util.js";
+import {read, sfc32, cyrb128} from "./util.js";
 let shipStartValue = await read("./config/stats/ships.json");
 let ammunition = await read("./config/stats/ammunition.json");
 
-function page_builder (shipType, language, shipCount) {
+function page_builder (shipType, language, shipCount, wind) {
   let data = structuredClone(shipStartValue[shipType]);
   let html = "";
 
@@ -217,12 +217,16 @@ function page_builder (shipType, language, shipCount) {
   rightSide.children[rightSide.children.length-1].textContent = language.movement_points + " 0° ⟳";
   rightSide.children[rightSide.children.length-1].id = "rotateMovementCanvas"
 
-  const movementCanvas = document.createElement("canvas");
-  rightSide.appendChild(movementCanvas);
-  movementCanvas.style.width = "100%";
-  movementCanvas.id = "movementCanvas";
+  rightSide.appendChild(document.createElement("div"))
+  rightSide.children[rightSide.children.length-1].id = "movementCanvas"
 
-  drawMovementCanvas(movementCanvas, data, 0);
+  const movementCanvas = document.createElement("canvas");
+  rightSide.children[rightSide.children.length-1].appendChild(movementCanvas);
+  movementCanvas.style.width = "100%";
+  movementCanvas.id = "movementCanvas_" + shipCount;
+  movementCanvas.classList.add("rod:0")
+
+  drawMovementCanvas(movementCanvas, data, 0, wind);
 
   /*const divvy = document.createElement("div");
   divvy.classList.add("extend");
@@ -275,7 +279,7 @@ function adjustBuilder(classification, startingValue){
   adjustRow.children[2].textContent = "+";
   return adjustTable;
 }
-function drawMovementCanvas(movementCanvas, data, rotation){
+function drawMovementCanvas(movementCanvas, data, rotation, wind){
   const ctx = movementCanvas.getContext("2d");
   ctx.reset();
   //ctx.clearRect(0,0, movementCanvas.width, movementCanvas.height);
@@ -285,21 +289,25 @@ function drawMovementCanvas(movementCanvas, data, rotation){
   ctx.translate(centerX, centerY);
   ctx.rotate(rotation*Math.PI/2);
   ctx.translate(-centerX, -centerY);
-  ctx.moveTo(centerX-movementCanvas.height*0.75/2, centerY*0.25);
+  /*ctx.moveTo(centerX-movementCanvas.height*0.75/2, centerY*0.25);
   ctx.lineTo(centerX, centerY*0.125);
   ctx.lineTo(centerX+movementCanvas.height*0.75/2, centerY*0.25);
-  ctx.rect(centerX-movementCanvas.height*0.75/2, centerY*0.25, movementCanvas.height*0.75, movementCanvas.height*0.75);
+  ctx.rect(centerX-movementCanvas.height*0.75/2, centerY*0.25, movementCanvas.height*0.75, movementCanvas.height*0.75);*/
 
-  ctx.fillText(data.movementPoints.bow, centerX-ctx.measureText(data.movementPoints.bow).width/2, centerY*0.125-2);
-  ctx.fillText(data.movementPoints.bow_port, centerX-movementCanvas.height*0.75/2-ctx.measureText(data.movementPoints.bow_port).width-2, centerY*0.25);
-  ctx.fillText(data.movementPoints.bow_starboard, centerX+movementCanvas.height*0.75/2+2, centerY*0.25);
-  ctx.fillText(data.movementPoints.port, centerX-movementCanvas.height*0.75/2-ctx.measureText(data.movementPoints.bow_port).width-2, centerY);
-  ctx.fillText(data.movementPoints.starboard, centerX+movementCanvas.height*0.75/2+2, centerY);
-  ctx.fillText(data.movementPoints.stern, centerX-ctx.measureText(data.movementPoints.stern).width/2, movementCanvas.height*0.875 + 2 + ctx.measureText(data.movementPoints.stern).actualBoundingBoxAscent + ctx.measureText(data.movementPoints.stern).actualBoundingBoxDescent);
+  ctx.fillText(printMovementPoints(data.movementPoints.bow, wind[(2*rotation)%8]), centerX-ctx.measureText(printMovementPoints(data.movementPoints.bow, wind[0])).width/2, centerY*0.125-2);
+  ctx.fillText(printMovementPoints(data.movementPoints.bow_port, wind[(2*rotation+7)%8]), centerX-movementCanvas.height*0.75/2-2, centerY*0.25);
+  ctx.fillText(printMovementPoints(data.movementPoints.bow_starboard, wind[(2*rotation+1)%8]), centerX+movementCanvas.height*0.75/2+2-ctx.measureText(printMovementPoints(data.movementPoints.bow_starboard, wind[0])).width, centerY*0.25);
+  ctx.fillText(printMovementPoints(data.movementPoints.port, wind[(2*rotation+6)%8]), centerX-movementCanvas.height*0.75/2-2, centerY);
+  ctx.fillText(printMovementPoints(data.movementPoints.starboard, wind[(2*rotation+2)%8]), centerX+movementCanvas.height*0.75/2+2-ctx.measureText(printMovementPoints(data.movementPoints.starboard, wind[(2*rotation+2)%8])).width, centerY);
+  ctx.fillText(printMovementPoints(data.movementPoints.stern, wind[(2*rotation+4)%8]), centerX-ctx.measureText(printMovementPoints(data.movementPoints.stern, wind[(2*rotation+4)%8])).width/2, movementCanvas.height*0.875 + 2 + ctx.measureText(data.movementPoints.stern).actualBoundingBoxAscent + ctx.measureText(data.movementPoints.stern).actualBoundingBoxDescent);
   ctx.stroke();
   ctx.translate(centerX, centerY);
   ctx.rotate(-rotation*Math.PI/2);
   ctx.translate(-centerX, -centerY);
+}
+
+function printMovementPoints(baseSpeed, wind){
+  return baseSpeed[0]+wind + "(" + baseSpeed[0] + ((wind<0)?"-":"+") + Math.abs(wind) + ")/" + baseSpeed[1]
 }
 
 
