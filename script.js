@@ -12,6 +12,7 @@ let multiplier = 1;
 let selectedPrice = "medium_price";
 let windRand;
 let currentWind = []
+let windRound = 0
 let globalShipCount = 0;
 //global variables
 let money = 100;
@@ -308,7 +309,7 @@ function updateMainPage(){
   buyPage.appendChild(globalShipCountDiv)
 
   let counterDiv = document.createElement("div")
-  counterDiv.innerText = 0;
+  counterDiv.innerText = windRound;
   counterDiv.id = "counterDiv"
   buyPage.appendChild(counterDiv)
 
@@ -342,7 +343,8 @@ function generateWindseed(textSeed) {
   return sfc32(windSeed[0], windSeed[1], windSeed[2], windSeed[3]);
 }
 function stepWind(){
-  document.getElementById("counterDiv").innerText = parseInt(document.getElementById("counterDiv").innerText) + 1
+  windRound++
+  document.getElementById("counterDiv").innerText = windRound
   let windDir = windRand()*360
   let windStrength = windRand()*4+1
 
