@@ -12,6 +12,7 @@ let multiplier = 1;
 let selectedPrice = "medium_price";
 let windRand;
 let currentWind = []
+let globalShipCount = 0;
 //global variables
 let money = 100;
 let shipCount = 1;
@@ -49,7 +50,7 @@ document.addEventListener("click", function (e){
       if(name == "") name = language.ship + " " + shipCount;
       document.getElementById("shipName").placeholder = language.ship + " " + (shipCount + 1);
       document.getElementById("ship_select_body").innerHTML += "<td id='ship_select_tab' class='ship_" + shipCount + " ship_select_tab'>"+ name + " (" + language[document.getElementById("ship_type").value] + ")</td>";
-      document.getElementById("ship_stats_body").appendChild(page_builder(value, language, shipCount, currentWind));
+      document.getElementById("ship_stats_body").appendChild(page_builder(value, language, shipCount, currentWind, globalShipCount));
       ships["ship_" + shipCount] = structuredClone(shipStartValue[value])
       ships["ship_" + shipCount].name = name;
       ships["ship_" + shipCount].type = value;
@@ -58,6 +59,8 @@ document.addEventListener("click", function (e){
         ships["ship_" + shipCount].ammunition[shot] = 0;
       }
       shipCount++;
+      globalShipCount++;
+      document.getElementById("globalShipCountDiv").innerText = "Global ship index: " + globalShipCount
       break;
     case "card":
       if(e.target.className.includes("card_active")){
@@ -284,6 +287,20 @@ function updateMainPage(){
   })
   buyPage.appendChild(seedInput)
 
+  let globalShipCountDiv = document.createElement("div")
+  globalShipCountDiv.innerText = "Global ship index: " + globalShipCount
+  globalShipCountDiv.id = "globalShipCountDiv"
+  globalShipCountDiv.onclick = (() => {
+    globalShipCount++;
+    globalShipCountDiv.innerText = "Global ship index: " + globalShipCount
+  })
+  buyPage.appendChild(globalShipCountDiv)
+
+  let counterDiv = document.createElement("div")
+  counterDiv.innerText = 0;
+  counterDiv.id = "counterDiv"
+  buyPage.appendChild(counterDiv)
+
   buyPage.appendChild(document.createElement("br"))
   let windVisual = document.createElement("canvas")
   windVisual.id = "windVisual"
@@ -314,6 +331,7 @@ function generateWindseed(textSeed) {
   return sfc32(windSeed[0], windSeed[1], windSeed[2], windSeed[3]);
 }
 function stepWind(){
+  document.getElementById("counterDiv").innerText = parseInt(document.getElementById("counterDiv").innerText) + 1
   let windDir = windRand()*360
   let windStrength = windRand()*4+1
 

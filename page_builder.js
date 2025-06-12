@@ -2,7 +2,7 @@ import {read, sfc32, cyrb128} from "./util.js";
 let shipStartValue = await read("./config/stats/ships.json");
 let ammunition = await read("./config/stats/ammunition.json");
 
-function page_builder (shipType, language, shipCount, wind) {
+function page_builder (shipType, language, shipCount, wind, globalID) {
   let data = structuredClone(shipStartValue[shipType]);
   let html = "";
 
@@ -159,6 +159,11 @@ function page_builder (shipType, language, shipCount, wind) {
   row.children[row.children.length-1].src = "./pictures/cards/shipSlots.png";
   row.children[row.children.length-1].id = "shoot";
   row.children[row.children.length-1].className = "stern";
+
+  let globalShipIDDiv = document.createElement("div")
+  globalShipIDDiv.innerText = globalID
+  leftSide.appendChild(globalShipIDDiv)
+
   rightSide.appendChild(document.createElement("h2"));
   rightSide.children[rightSide.children.length-1].textContent = language.storage;
   rightSide.appendChild(document.createElement("table"));
