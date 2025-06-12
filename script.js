@@ -122,9 +122,11 @@ document.addEventListener("click", function (e){
           return;
         }
         if(reciever == "storage"){
-          if(document.getElementsByClassName("card_active")[0].classList[1] == "empty") {
-            money += storage[ships[getShipID(e.target)][reciever][e.target.classList[1]]][selectedPrice]
-          } else money -= storage[document.getElementsByClassName("card_active")[0].classList[1]][selectedPrice];
+          if(selectedPrice != "none_price"){
+            if(document.getElementsByClassName("card_active")[0].classList[1] == "empty") {
+              money += storage[ships[getShipID(e.target)][reciever][e.target.classList[1]]][selectedPrice]
+            } else money -= storage[document.getElementsByClassName("card_active")[0].classList[1]][selectedPrice];
+          }
         }
         ships[getShipID(e.target)][reciever][e.target.classList[1]] = document.getElementsByClassName("card_active")[0].classList[1]
       }
@@ -164,19 +166,28 @@ document.addEventListener("click", function (e){
       document.getElementById("price_high").style.borderStyle = "solid";
       document.getElementById("price_medium").style.borderStyle = "none";
       document.getElementById("price_low").style.borderStyle = "none";
-
+      document.getElementById("price_none").style.borderStyle = "none";
       break;
     case "price_medium":
       selectedPrice = "medium_price";
       document.getElementById("price_medium").style.borderStyle = "solid";
       document.getElementById("price_high").style.borderStyle = "none";
       document.getElementById("price_low").style.borderStyle = "none";
+      document.getElementById("price_none").style.borderStyle = "none";
       break;
     case "price_low":
       selectedPrice = "cheap_price";
       document.getElementById("price_low").style.borderStyle = "solid";
       document.getElementById("price_medium").style.borderStyle = "none";
       document.getElementById("price_high").style.borderStyle = "none";
+      document.getElementById("price_none").style.borderStyle = "none";
+      break;
+    case "price_none":
+      selectedPrice = "none_price";
+      document.getElementById("price_low").style.borderStyle = "none";
+      document.getElementById("price_medium").style.borderStyle = "none";
+      document.getElementById("price_high").style.borderStyle = "none";
+      document.getElementById("price_none").style.borderStyle = "solid";
       break;
     case "removeShip":
       document.getElementsByClassName("ship_select_tab")[0].classList.add("ship_select_tab_active");

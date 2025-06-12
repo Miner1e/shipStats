@@ -40,8 +40,8 @@
         "expensive_price": 50
     },
     "divingMask":{
-        "cheap_price": 0,
-        "medium_price": 0,
-        "expensive_price": 0
+        "cheap_price": 40,
+        "medium_price": 40,
+        "expensive_price": 40
     }
 }
