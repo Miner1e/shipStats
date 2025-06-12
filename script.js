@@ -295,6 +295,7 @@ function updateMainPage(){
   seedInput.value = language.pirate_words[Math.round(Math.random()*language.pirate_words.length-1)]
   seedInput.id = "seedInput"
   seedInput.addEventListener("focusout", (e) => {
+    windRound = 0
     windRand = generateWindseed(seedInput.value)
   })
   buyPage.appendChild(seedInput)
