@@ -1,8 +1,8 @@
 \documentclass[12pt,a4paper]{scrartcl}
 
-\usepackage[lmargin=2.5cm, rmargin=2.5cm, top=3cm, bottom=3cm]{geometry}
+%\usepackage{lua-visual-debug}
 
-\usepackage[default]{fontsetup}
+\usepackage[lmargin=2.5cm, rmargin=2.5cm, top=3cm, bottom=3cm]{geometry}
 
 \usepackage[ngerman]{babel}
 \usepackage[babel=true,german=quotes]{csquotes}
@@ -18,10 +18,24 @@
 \usephysicsmodule{ab.legacy}
 %\usepackage{bm}
 
-\usepackage{unicode-math}
-%\setmathfont{Latin Modern Math}
-\setmathfont[StylisticSet=1]{NewCMMath-Book}
+\usepackage{fontspec}
+
+\usepackage[math-style=ISO, partial=upright]{unicode-math}
+%\usepackage[default]{fontsetup}
+\setmainfont{Linux Libertine O}
 %\setmathfont{New Computer Modern Math}
+\setmathfont[StylisticSet=1]{NewCMMath-Book}
+\setsansfont{Linux Biolinum O}
+
+\mathitalicsmode=1
+\let\oldright\right
+\protected\def\right{^^^^200b\oldright}
+\let\oldfrac\frac
+\protected\def\frac#1#2{\oldfrac{#1^^^^200b}{#2^^^^200b}}
+
+\newcommand{\italcorr}{^^^^200b}
+\let\oldrparen\)
+\protected\def\){\italcorr\oldrparen}
 
 % Einheiten
 \usepackage{siunitx}
@@ -192,6 +206,8 @@ Um ein Schiff kaufen zu können, benötigt man ein Schiff, das alle Waren, die f
 
 \subsection{Bergen}\label{sbscBergen}
 
+Gesunkene Schiffe und Schätze können geborgen werden. Dies wird durch \deph{Beuteplättchen} angezeigt. Um eine Bergungsaktion zu beginnen muss sich das bergende Schiff mit mindestens einem Feld auf dem Beuteplättchen befinden. Ist das Besatzungsmitglied \textit{Taucher} an Bord, kann die dort liegende Beute an Bord genommen werden, falls Frachtraum verfügbar ist.
+
 \subsection{Besatzung}
 
 Jedes Besatzungsmitglied darf höchstens einmal auf einem Schiff eingesetzt werden.
@@ -223,7 +239,7 @@ dafür sehen sollte.
 	\exphead{Distanzrang}
 	\medskip
 
-	\noindent Schiffe können sich nur in ein Feuergefecht begeben, wenn mindestens ein Distanzrang 0 existiert. Da Schiffe der \hyperref[data]{Ränge} \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen. Dazu wird der Distanzrang eingeführt, der drei Stufen haben kann und die sich wie folgt ergeben:
+	\noindent Schiffe können sich nur in ein Feuergefecht begeben, wenn mindestens ein Distanzrang 0 existiert. Da Schiffe der \hyperref[data]{Klassen} \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen. Dazu wird der Distanzrang eingeführt, der drei Stufen haben kann und die sich wie folgt ergeben:
 	\begin{description}
 		\item[Rang 0:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels sind 0 Felder.
 		Hier gilt volle Trefferwahrscheinlichekeit und bei den Werten \epsdice{3} \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
@@ -238,7 +254,7 @@ dafür sehen sollte.
     \exphead{Schaden ermitteln}
     \medskip
 
-	\noindent Eine Teilseite sind Bug, Heck sowie Back- und Steuerbord, die aus so vielen gleichlangen Teilseiten bestehen, wie durch den Rang des Schiffes angegeben werden.
+	\noindent Eine Teilseite sind Bug, Heck sowie Back- und Steuerbord, die aus so vielen gleichlangen Teilseiten bestehen, wie durch die Klasse des Schiffes angegeben werden.
 	Eine Breitseite besteht aus mehreren Salven, wobei eine Salve das Schießen einzelner Teilseiten repräsentiert.
     \begin{description}
     	\item[Kanonenschaden:] Dieser Schaden ergibt sich als Summe aus allen Werten, die Schaden für eine einzelne Kanone erhöhen können. Das sind die Art der Kanone selbst und die genutzte Munition. Hypothetischer Schaden, der als Grundlage der Berechnung für den Salvenschaden (den tatsächlichen Schaden) dient.
@@ -252,8 +268,8 @@ dafür sehen sollte.
     	\item[Gesamtschaden:] Dies ist die Summe aller Salvenschäden.
     \end{description}
     Jetzt wird der Gesamtschaden von der Wandstärke der beschossenen Seite abgezogen. Fällt die Wandstärke einer Seite auf 0, ist diese Breitseite zerstört, feuerunfähig und kann nur durch Reparatur (\autoref{sbsbscReparatur}) wieder einsatzfähig gemacht werden.
-    Fällt die Gesamtwandstärke auf 0 ist das Schiff zerstört, kann nicht mehr repariert, aber seine Ladung
-    geborgen werden (\autoref{sbscBergen})
+    Fällt die Gesamtwandstärke auf 0 ist das Schiff zerstört und kann nicht mehr repariert werden. Das Schiff wird dann mit einem Beuteplättchen, das zur Größe des entsprechenden Schiffes passt, unterlegt. Damit kann seine Ladung
+    geborgen werden (\autoref{sbscBergen}).
 
     Die Aktion \emph{Kämpfen} ist beendet.
 \end{expbox}
@@ -262,7 +278,7 @@ dafür sehen sollte.
 %   \exphead{Sonderfall bei teilweise überlappenden Seiten}
 %    \medskip
 
-%    \noindent Da Schiffe der Ränge \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren
+%    \noindent Da Schiffe der Klassen \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren
 %    Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen (sog. direkte Teilseiten). In diesen Fällen wird der mögliche Schaden der Teilseiten bestimmt.
 %    Für den Schaden einer Teilseite, welche an der direkten anliegt (den 1. anliegenden Teilseite[n]), gilt eine verringerte
 %    Trefferwahrscheinlichkeit, sodass nur bei folgenden Würfelwerten getroffen wird: \epsdice{4} \epsdice{5} \epsdice{6}.
@@ -287,7 +303,7 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\exphead{Flaute}
 	\medskip
 
-	\noindent \textit{Die Segel erschlaffen, es ist Zeit das Schiff auf Vordermann zu bringen und die Rumfässer zu leeren: Eine Flaute macht sich breit.}\\
+	\noindent \textit{Die Segel erschlaffen, es ist Zeit das Schiff auf Vordermann zu bringen und die Rumfässer zu leeren: Eine Flaute macht sich breit.}\smallskip\\
 	Ein ausgewürfeltes Schiff kann in dieser Runde nicht die Aktion \emph{Segeln} wählen.
 \end{expbox}
 
@@ -295,15 +311,15 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\exphead{Segelschaden}
 	\medskip
 
-	\noindent \textit{}\\
-	Ein ausgewürfeltes Schiff setzt für diese Runde aus.
+	\noindent \textit{}\smallskip\\
+	Ein ausgewürfeltes Schiff kann in dieser Runde nur mit halber Geschwindigkeit fahren. Es wird stets abgerundet.
 \end{expbox}
 
 \begin{expbox}
 	\exphead{Hurrikan}
 	\medskip
 
-	\noindent \textit{Am Horizont bildet sich eine rießige, finstere Wolkenkonstellation. Ein starker Wind und Regen kommen auf. Das Meer raut in zunehmender Geschwindigkeit auf. Ein Hurrikan nähert sich!}\\
+	\noindent \textit{Am Horizont bildet sich eine rießige, finstere Wolkenkonstellation. Ein starker Wind und Regen kommen auf. Das Meer raut in zunehmender Geschwindigkeit auf. Ein Hurrikan nähert sich!}\smallskip\\
 	Das betroffene Schiff wird auf das erwürfelte Feld versetzt. Dieses Ereignis hat keine Wirkung, wenn sich das Schiff an einem Hafen befindet.
 \end{expbox}
 
@@ -311,25 +327,23 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\exphead{Skorbut}
 	\medskip
 
-	\noindent \textit{Es ist schon lange her, dass die Matrosen frische Südfrüchte verspeist haben.}
-
-	\noindent Für das betroffene Schiff darf ausgesucht werden, welches Besatzungsmitglied verloren wird. Durch die Abgabe von einmal Südfrüchten oder einmal Medizin, kann dieser Effekt nullifiziert werden.
+	\noindent \textit{Es ist schon lange her, dass die Matrosen frische Südfrüchte verspeist haben.}\smallskip\\
+	Für das betroffene Schiff darf ausgesucht werden, welches Besatzungsmitglied verloren wird. Durch die Abgabe von einmal Südfrüchten oder einmal Medizin, kann dieser Effekt nullifiziert werden.
 \end{expbox}
 
 \begin{expbox}
 	\exphead{Meuterei}
 	\medskip
 
-	\noindent \textit{Die Besatzung ist nicht mit ihrem Kapitän einverstanden und versammelt sich lauthals vor der Kapitänskajüte.}
-
-	\noindent Die Fähigkeiten der gesamten Besatzung werden für zwei Runden ausgesetzt.
+	\noindent \textit{Die Besatzung ist nicht mit ihrem Kapitän einverstanden und versammelt sich lauthals vor der Kapitänskajüte.}\smallskip\\
+	Die Fähigkeiten der gesamten Besatzung werden für zwei Runden ausgesetzt.
 \end{expbox}
 
 \begin{expbox}
 	\exphead{Kraken}
 	\medskip
 
-	\noindent \textit{Gigantische Luftblasen zerbersten die Meeresoberfläche und düstere Tentakel halten Ausschau nach unachtsamen Matrosen.}\\
+	\noindent \textit{Gigantische Luftblasen zerbersten die Meeresoberfläche und düstere Tentakel halten Ausschau nach unachtsamen Matrosen.}\smallskip\\
 	Ein \(7 \times 7\) Felder großes Feld Bei dieser Ereigniskarte wird zunächst einer der Quadranten A, B, C, D, in dem der Kraken auftaucht, durch einen W4 bestimmt. Dann verschiebt sich seine Position auf ein weiteres, zufällig ausgewähltes Feld, ausgewählt durch 2W20 erst für Breiten- und dann für den Längengrad innerhalb des Quadranten. Für jede Runde, in der ein Schiff in der Krakenzone ist, muss es sich ein Feuergefecht mit dem Kraken liefern. Der Kraken hat folgende Eigenschaften:
 	\begin{description}
 		\item[Leben (Gesamtwandstärke):] 30
@@ -342,8 +356,46 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\exphead{Pulverfassexplosion}
 	\medskip
 
-	\noindent \textit{Den Smutje mit der Ladungssicherung zu beauftragen war keine gute Idee: Eine alte Öllampe fällt zu Boden und rollt in Richtung eines undichten Pulverfasses.}
+	\noindent \textit{Den Smutje mit der Ladungssicherung zu beauftragen war keine gute Idee: Eine alte Öllampe fällt zu Boden und rollt in Richtung eines undichten Pulverfasses.}\smallskip\\
+	
+\end{expbox}
 
+\begin{expbox}
+	\exphead{Schatz}
+	\medskip
+	
+	\noindent Schiffe
+	\begin{description}
+		\item[Gute Schiffsplanken:] Diese können zu einem beliebiegen Zeitpunkt verwendet werden um das Schiff vollständig zu reparieren.
+		\item[Das Horn des Qun:] \(+5\) Wind in jede Richtung.
+		\item[Schwarzer Rum:] Ein Crewmitglied verdoppelt seine Werte für eine Runde.
+		\item[Zielwasser:] Der Distanzrang beträgt sofort \num{0}.
+		\item[Elmsfeuer:] Wird man von einer Ereigniskarte getroffen, kann diese abgewehrt werden.
+	\end{description}
+\end{expbox}
+
+\section{Spielverlauf}\label{verlauf}
+
+\subsection{Spielbeginn}
+
+\subsection{Spielziel}
+
+Erreicht ein Spieler eines der Spielziele, endet das Spiel sofort und dieser Spieler gewinnt den \textsc{Thron der See}.
+
+\begin{expbox}
+	\exphead{Flottenadmiral}
+	\medskip
+	
+	\noindent \textit{Ein wagemutiger Kapitän hat sich eine mächtige Flotte aufgebaut. Damit hat er sich den Thron der See gesichert.}\smallskip\\
+	Um die Flottengröße \(F\) zu ermitteln, wird die Klasse \(K\) jedes Schiffes, das zur Flotte \(\Phi\) gehört, addiert. Sobald die Flottengröße \num{15} erreicht, ist das Spielziel erreicht. \[ F = \sum_{i \in {\Phi}} K_i \geqslant 15 \implies \text{Sieg}\]
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Handelskapitän}
+	\medskip
+	
+	\noindent \textit{Ein gewitzter Seefahrer}\smallskip\\
+	
 \end{expbox}
 
 \section{Datenblätter}\label{data}
@@ -461,15 +513,16 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 \begin{table}[!h]
     \centering
     \begin{tabular}{|l|c|c|l|}\hline
-        \textbf{Mitglied} & \textbf{Leben} & \textbf{Preis} & \textbf{Effekt} \\ \hline\hline
+        \textbf{Mitglied} & \textbf{Leben} & \textbf{Preis} & \textbf{Effekt/Beschreibung} \\ \hline\hline
         Steuermann   & 4 & 75 & \(-1\) Wendekosten \\ \hline
-        Matrose      & 4 & 20 & +1 Wind in jede Richtung\\ \hline
+        Matrose      & 4 & 20 & \(+1\) Wind in die Richtung, in die der Wind dort negativ ist\\ \hline
         Smutje       & 4 & 10 & \\ \hline
         Hexe         & 7 & 5  & Darf einen Würfel umdrehen \\ \hline
-        Kanonier     & 4 & 50 & +1 Kanonenreichweite \\ \hline
-        Pirat & 1 & 10 & +1 Kleiner Würfel \\ \hline
-        Söldner      & 2 & 30 & +1 Mittlerer Würfel \\ \hline
-        Seebär       & 4 & 70 & +1 Großer Würfel \\ \hline
+        Kanonier     & 4 & 50 & \(+1\) Kanonenreichweite \\ \hline
+        Pirat & 1 & 10 & \(+1\) Kleiner Würfel \\ \hline
+        Söldner      & 2 & 30 & \(+1\) Mittlerer Würfel \\ \hline
+        Seebär       & 4 & 70 & \(+1\) Großer Würfel \\ \hline \hline
+        Taucher      & 2 & 50 & Erlaubt es Schätze und gesunkene Schiffe zu \hyperref[sbscBergen]{bergen}.\\ \hline
     \end{tabular}
 \end{table}
 
@@ -479,9 +532,10 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
     \centering
     \begin{tabular}{|l|c|c||c|c|}\hline
         \textbf{Kanone} & \textbf{Reichweite} & \textbf{Schaden} & \textbf{Roheisen} & \textbf{Goldnuggets}\\ \hline\hline
-        Seeklinge    & +1 & +0 & 1 & -- \\ \hline
-        Machtbrecher & +0 & +1 & 1 & -- \\ \hline
-        Dunkelkerker & +1 & +1 & 1 & 1 \\ \hline
+        Seeklinge    & +0 & +0 & 0 & -- \\ \hline
+        Rumpfbrecher & +0 & +1 & 1 & -- \\ \hline
+        Dunkelkerker & +1 & +0 & 1 & -- \\ \hline
+        Plankenschänder  & +1 & +1 & 1 & 1  \\ \hline
     \end{tabular}
 \end{table}
 
@@ -489,16 +543,16 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 
 \begin{table}[!h]
     \centering
-    \begin{tabular}{|l|g|y|R|c|}\hline
-        \textbf{Ware} & \textbf{Kaufpreis} & \textbf{Mangel-Verkauf} & \textbf{Krise-Verkauf} & \textbf{Max. Profit} \\ \hline\hline
-        Dschungelholz & 2  & 6  & 8  & 6 \\ \hline
-        Baumwolle     & 6  & 10 & 14 & 8 \\ \hline
-        Südfrüchte    & 8  & 14 & 18 & 10 \\ \hline
-        Leinentuch    & 12 & 18 & 24 & 12 \\ \hline
-        Roheisen      & 14 & 22 & 28 & 14 \\ \hline
-        Rumfass       & 20 & 28 & 36 & 16 \\ \hline
-        Medizin       & 24 & 34 & 42 & 18 \\ \hline
-        Goldnuggets   & 30 & 40 & 50 & 20 \\ \hline
+    \begin{tabular}{|l|g|y|R|c|c|}\hline
+        \textbf{Ware} & \textbf{Kaufpreis} & \textbf{Mangel-Verkauf} & \textbf{Krise-Verkauf} & \textbf{Min. Profit} & \textbf{Max. Profit} \\ \hline\hline
+        Dschungelholz & 2  & 6  & 8  & 4  & 6  \\ \hline
+        Baumwolle     & 6  & 10 & 14 & 4  & 8  \\ \hline
+        Südfrüchte    & 8  & 14 & 18 & 6  & 10 \\ \hline
+        Leinentuch    & 12 & 18 & 24 & 6  & 12 \\ \hline
+        Roheisen      & 14 & 22 & 28 & 8  & 14 \\ \hline
+        Rumfass       & 20 & 28 & 36 & 8  & 16 \\ \hline
+        Medizin       & 24 & 34 & 42 & 10 & 18 \\ \hline
+        Goldnuggets   & 30 & 40 & 50 & 10 & 20 \\ \hline
     \end{tabular}
 \end{table}
 
