@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.11.26)  30 DEC 2025 17:42
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.11.26)  30 DEC 2025 19:18
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -2709,10 +2709,10 @@ Here is how much of LuaTeX's memory you used:
  912 words of node memory still in use:
    8 hlist, 2 vlist, 2 rule, 1 local_par, 7 glue, 5 kern, 1 penalty, 1 margin_ke
 rn, 4 glyph, 26 attribute, 107 glue_spec, 15 attribute_list, 2 write nodes
-   avail lists: 1:8,2:2197,3:537,4:342,5:551,6:105,7:8073,8:35,9:1332,10:12,11:8
+   avail lists: 1:6,2:2197,3:537,4:342,5:551,6:105,7:8073,8:35,9:1332,10:12,11:8
 38,12:1
  65144 multiletter control sequences out of 65536+600000
- 115 fonts using 71253507 bytes
+ 115 fonts using 71253395 bytes
  109i,11n,125p,11206b,3127s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/newcomputermodern/NewC
 M10-Book.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/newcomput
@@ -2722,7 +2722,7 @@ ts/opentype/public/newcomputermodern/NewCM10-BookItalic.otf></usr/local/texlive/
 2025/texmf-dist/fonts/opentype/public/newcomputermodern/NewCM10-Book.otf></usr/l
 ocal/texlive/2025/texmf-dist/fonts/opentype/public/newcomputermodern/NewCMSans10
 -Bold.otf>
-Output written on main.pdf (14 pages, 71891 bytes).
+Output written on main.pdf (14 pages, 71886 bytes).
 
 PDF statistics: 270 PDF objects out of 1000 (max. 8388607)
  223 compressed objects within 3 object streams

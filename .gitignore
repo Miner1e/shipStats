@@ -32,7 +32,7 @@ Thumbs.db
 .env.local
 .env.*.local
 
-*.toc
-*.gz
-*.log
-*.aux
+**.toc
+**.gz
+**.log
+**.aux
