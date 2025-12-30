@@ -1,0 +1,33 @@
+# Generated .gitignore file for: JavaScript, IntelliJ, VSCode
+# Created with FOSSA's DevOps Tools
+
+# JavaScript
+# Add JavaScript-specific ignores here
+
+# IntelliJ
+# Add IntelliJ-specific ignores here
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Common
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.tmp
+*.swp
+*~
+
+# IDE and editor generated files
+.idea/
+*.sublime-*
+
+# Local environment files
+.env
+.env.local
+.env.*.local
