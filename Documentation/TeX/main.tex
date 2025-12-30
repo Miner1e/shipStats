@@ -1,0 +1,505 @@
+\documentclass[12pt,a4paper]{scrartcl}
+
+\usepackage[lmargin=2.5cm, rmargin=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+\usepackage[default]{fontsetup}
+
+\usepackage[ngerman]{babel}
+\usepackage[babel=true,german=quotes]{csquotes}
+
+\usepackage{microtype}
+
+% Mathepakete (unicode-math ersetzt amssymb, amsfonts etc.)
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{mleftright}
+\usepackage{fixdif,derivative}
+\usepackage{physics2}
+\usephysicsmodule{ab.legacy}
+%\usepackage{bm}
+
+\usepackage{unicode-math}
+%\setmathfont{Latin Modern Math}
+\setmathfont[StylisticSet=1]{NewCMMath-Book}
+%\setmathfont{New Computer Modern Math}
+
+% Einheiten
+\usepackage{siunitx}
+\sisetup{locale = DE}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=blue,
+	citecolor=blue,
+	pdftitle=Throne-of-the-Seas,
+	pdfauthor=JM
+}
+
+\usepackage{mdframed}
+\usepackage{xparse}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{tikz}
+%\usepackage{pst-all}
+\usepackage{romannum}
+\AtBeginDocument{\pagenumbering{arabic}}
+\usepackage{epsdice}
+\usepackage{wrapfig}
+
+
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    pdftitle=Throne of the Seas,
+    pdfauthor=Julian Molt
+}
+
+\newcommand{\exphead}[1]{\textsf{\textbf{#1}}}
+
+\setlength{\textfloatsep}{5pt} % Abstand zwischen Floats und Text
+\setlength{\floatsep}{5pt}     % Abstand zwischen zwei Floats
+\setlength{\intextsep}{5pt}    % Abstand für Floats, die im Text stehen
+
+
+%Erklärkästchen
+\newmdenv[
+    linewidth=1pt,
+    topline=false,
+    bottomline=false,
+    leftline=true,
+    rightline=false,
+    linecolor=lightgray,
+    innerrightmargin=0,
+    innerleftmargin=1em,
+    innertopmargin=0.5em,
+    innerbottommargin=0.5em,
+    skipabove=1em,
+    skipbelow=1em
+]{expbox}
+
+\title{\textsc{Throne of the Seas}}
+\author{Lukas Schreiner, Johannes Philippin, Julian Molt}
+\date{}
+
+% Spaltenfarben
+\newcolumntype{g}{>{\columncolor[HTML]{50C878}} c} % Grün
+\newcolumntype{y}{>{\columncolor[HTML]{FFC800}} c} % Gelb
+\newcolumntype{R}{>{\columncolor[HTML]{F75D59}} c} % Rot
+
+\definecolor{Grün}{HTML}{50C878}
+\definecolor{Gelb}{HTML}{FFC800}
+\definecolor{Rot}{HTML}{F75D59}
+
+\newcommand{\deph}[1]{\textsc{\textbf{#1}}} %Define Phrase
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Spielanleitung}
+
+Ein Zug ist jede Permutation der Aktionen \emph{Segeln}, \emph{Handeln}, \emph{Schiff kaufen}, \emph{Tauschen}, \emph{Bergen} und \emph{Kämpfen}.
+
+\subsection{Segeln}
+
+Nach der Aktion \emph{Segeln} kann man stets handeln, tauschen, bergen oder kämpfen.\par
+\noindent Jedes Feld, das auf dem Weg zum Zielort durchfahren wird, muss ein Meeresfeld sein.
+
+\bigskip
+
+\noindent Jeder Schiffstyp besitzt Standardwerte, die \deph{Segelstärken}, die in \autoref{sbscSchiffe} aufgeführt sind. Jede Runde wird nun eine neue Windkarte
+aufgedeckt, die \deph{Windstärken} zwischen \(-4\) und \(+4\) in jede Richtung (N, NO, O, SO, S, SW, W, NW) bringen. Durch Addition
+wird die höchstmögliche Anzahl an Kästchen, die in eine Richtung zurückgelegt werden kann, errechnet. Sie wird \deph{Windeseifer} genannt.
+Nun gibt es mehrere Möglichkeiten, wie man sich bewegen kann:
+
+\begin{enumerate}
+    \item In eine Richtung segeln
+    \item Auf der Stelle die Richtung ändern (wenden)
+    \item In eine Richtung segeln und dann wenden
+    \item In eine Richtung segeln, dann wenden und weiter, in eine beliebige Richtung segeln
+\end{enumerate}
+
+\begin{expbox}
+    \exphead{In eine Richtung segeln}
+    \medskip
+
+    \noindent Hierfür wählt man erst eine der 8 möglichen Himmelsrichtungen, ermittelt die Windeseifer und setzt sein Schiff dann maximal so viele
+    Felder in diese Richtung weiter.\par
+    Die Aktion \emph{Segeln} ist beendet.
+\end{expbox}
+
+\begin{expbox}
+    \exphead{Auf der Stelle wenden}
+    \medskip
+
+    \noindent Man sucht sich die Segel- und Windstärke aus, die die größte Windeseifer ergeben und kann sich dann in \textbf{\qty{90}{\degree}} Schritten % Boldfont funktioniert mit qty nicht
+    auf der Stelle wenden. Eine Wendung kostet den Parameter \textbf{Wendigkeit} an Windeseifer. Die Windeseifer darf wenigstens 0 werden.\par
+    Die Aktion \emph{Segeln} ist beendet.
+\end{expbox}
+
+\begin{expbox}
+    \exphead{Segeln, dann wenden}
+    \medskip
+
+    \noindent Zuerst muss man wissen, dass man diesen Aktion ausführen will. Dann überlegt man sich, wie oft man nach dem
+    Segeln wenden möchte. Die Windeseifer ergibt sich nun eindeutig aus der Segelrichtung vor Wendebeginn, im Gegensatz zu
+    \enquote{Auf der Stelle wenden}. Die Anzahl an Wendungen, multipliziert mit dem Parameter Wendigkeit und dann von der Windeseifer subtrahiert ergibt die Windeseifer, welche nun zum Segeln in eine Richtung zur Verfügung steht. Jetzt kann man also
+    segeln und dann wie überlegt wenden.\par
+    Beispiel: \(\text{Segelstärke} = 4, \text{Windstärke} = 3, \text{Windeseifer} = 4 + 3 = 7, \text{Wendigkeit} = 2\)
+    Möchte man nun \(1\times\) wenden verbraucht man dafür 2 Windeseifer, kann also davor nur noch 5 Felder in eine Richtung fahren.
+    Oder man könnte sich auch um 180° drehen, also \(3\times\) und dafür 6 Windeseifer benötigen, und somit davor noch höchstens
+    1 Feld weit fahren.\par
+    Die Aktion \emph{Segeln} ist beendet.
+\end{expbox}
+
+\begin{expbox}
+    \exphead{Segeln, wenden, dann weitersegeln}
+    \medskip
+
+    \noindent Dieser Aktion funktioniert exakt wie \enquote{Segeln, dann wenden}, nur dass nach Beendigung des Wendevorgangs in jede Richtung %„“
+    maximal so viel weitergesegelt werden kann, wie es der Parameter \deph{Ruderstärke} angibt. Dies ist die Zahl, die durch
+    einen Schrägstrich hinter der Segelstärke steht.\par
+    Die Aktion \emph{Segeln} ist beendet.
+\end{expbox}
+
+\subsection{Handeln}
+
+Gehandelt wird an den Häfen der Inseln. Ein Schiff kann an einem Hafen nur Handel betreiben, wenn es direkt an ihm liegt.
+Diagonale Felder gelten nicht.\par
+Jeder Hafen hat eine \deph{Friedenszone}, in der keine Angriffe stattfinden können.\par
+%Die Dingensens entsprechend einfärben, so wie auch in der Tabelle.
+An einem Hafen besteht für je eine Ware ein \textcolor{Grün}{\deph{Warenüberschuss}}, eine \textcolor{Rot}{\deph{Warenkrise}} und für die restlichen Waren ein
+\textcolor{Gelb}{\deph{Warenmangel}}. An einem Hafen können nur Waren, für die ein Warenüberschuss gilt, gekauft werden. Verkauft werden können jedoch
+alle Waren, deren Preise sich entsprechend ihrer Nachfragelage an diesem Hafen ergeben.
+
+\subsection{Schiffe kaufen}
+
+Um ein Schiff kaufen zu können, benötigt man ein Schiff, das alle Waren, die für den Bau und Erwerb des Schiffes benötigt werden, auf einmal lagern kann.
+
+\subsection{Tauschen}
+
+\subsection{Bergen}\label{sbscBergen}
+
+\subsection{Besatzung}
+
+Jedes Besatzungsmitglied darf höchstens einmal auf einem Schiff eingesetzt werden.
+
+\subsection{Kämpfen}
+
+\subsubsection{Feuergefecht}
+
+Feuergefechte können zwischen jeglichen Schiffen stattfinden, also auch der eigenen Flotte, wenn man einen Grund
+dafür sehen sollte.
+
+\begin{expbox}
+    \exphead{Reichweite}
+    \medskip
+
+    \noindent Eine Kanone hat eine \deph{Reichweite} von \textbf{3} zum eigenen Schiff anliegenden Feldern. Dies gilt nur für die Richtungen,
+    in die die Kanonen ausgerichtet sind, also Bug, Heck, Backbord und Steuerbord. Nur diagonal kann also nicht geschossen werden.
+\end{expbox}
+
+\begin{expbox}
+    \exphead{Munition}
+    \medskip
+
+    \noindent Um einen Schuss abzugeben, benötigt man pro Kanone eine Munitionseinheit. Gefeuert wird pro Seite, sodass auch mehrere
+    Einheiten verschossen werden können. Munition muss gekauft werden. Schrotmunition macht einfachen Schaden, Kugelmunition doppelten.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Distanzrang}
+	\medskip
+
+	\noindent Schiffe können sich nur in ein Feuergefecht begeben, wenn mindestens ein Distanzrang 0 existiert. Da Schiffe der \hyperref[data]{Ränge} \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen. Dazu wird der Distanzrang eingeführt, der drei Stufen haben kann und die sich wie folgt ergeben:
+	\begin{description}
+		\item[Rang 0:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels sind 0 Felder.
+		Hier gilt volle Trefferwahrscheinlichekeit und bei den Werten \epsdice{3} \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
+		\item[Rang 1:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels ist 1 Feld.
+		Hier gilt verringerte Trefferwahrscheinlichkeit und bei den Werten \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
+		\item[Rang 2:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels sind 2 Felder.
+		Hier gilt die geringste Trefferwahrscheinlichkeit und nur bei den Werten \epsdice{5} oder \epsdice{6} wird getroffen.
+	\end{description}
+\end{expbox}
+
+\begin{expbox}
+    \exphead{Schaden ermitteln}
+    \medskip
+
+	\noindent Eine Teilseite sind Bug, Heck sowie Back- und Steuerbord, die aus so vielen gleichlangen Teilseiten bestehen, wie durch den Rang des Schiffes angegeben werden.
+	Eine Breitseite besteht aus mehreren Salven, wobei eine Salve das Schießen einzelner Teilseiten repräsentiert.
+    \begin{description}
+    	\item[Kanonenschaden:] Dieser Schaden ergibt sich als Summe aus allen Werten, die Schaden für eine einzelne Kanone erhöhen können. Das sind die Art der Kanone selbst und die genutzte Munition. Hypothetischer Schaden, der als Grundlage der Berechnung für den Salvenschaden (den tatsächlichen Schaden) dient.
+    	\item[Salvenschaden:] Eine Salve ist der Akt des Schießens einer Teilseite
+    	\[
+    	\mathrm{DMG} = \begin{cases}
+    		0 & \text{Salve trifft nicht}\\
+    		\text{Summe aller Kanonenschäden dieser Teilseite.} & \text{Salve trifft}
+    	\end{cases}
+    	\]
+    	\item[Gesamtschaden:] Dies ist die Summe aller Salvenschäden.
+    \end{description}
+    Jetzt wird der Gesamtschaden von der Wandstärke der beschossenen Seite abgezogen. Fällt die Wandstärke einer Seite auf 0, ist diese Breitseite zerstört, feuerunfähig und kann nur durch Reparatur (\autoref{sbsbscReparatur}) wieder einsatzfähig gemacht werden.
+    Fällt die Gesamtwandstärke auf 0 ist das Schiff zerstört, kann nicht mehr repariert, aber seine Ladung
+    geborgen werden (\autoref{sbscBergen})
+
+    Die Aktion \emph{Kämpfen} ist beendet.
+\end{expbox}
+
+%\begin{expbox}
+%   \exphead{Sonderfall bei teilweise überlappenden Seiten}
+%    \medskip
+
+%    \noindent Da Schiffe der Ränge \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren
+%    Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen (sog. direkte Teilseiten). In diesen Fällen wird der mögliche Schaden der Teilseiten bestimmt.
+%    Für den Schaden einer Teilseite, welche an der direkten anliegt (den 1. anliegenden Teilseite[n]), gilt eine verringerte
+%    Trefferwahrscheinlichkeit, sodass nur bei folgenden Würfelwerten getroffen wird: \epsdice{4} \epsdice{5} \epsdice{6}.
+%    Für die daran liegende Teilseite (2. anliegende Teilseite) gilt eine noch geringere Trefferwahrscheinlichkeit, sodass nur bei
+%    \epsdice{5} oder \epsdice{6} getroffen wird. Für die direkte(n) Teilseite(n) wird weiterhin bei den Werten
+%    \epsdice{3} \epsdice{4} \epsdice{5} \epsdice{6} getroffen.
+%\end{expbox}
+
+\subsubsection{Entern}
+
+\subsubsection{Schiffsreparatur}\label{sbsbscReparatur}
+
+Sobald ein Schiff beschädigt wurde kann es durch Bezahlen des prozentual erlittenen Schadens des Neupreises in Dukaten wieder repariert werden. Ein Schiff kann nur repariert werden, wenn es direkt an einem Hafenfeld liegt.
+
+\newpage
+
+\subsection{Ereigniskarten}
+
+Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur ein Schiff betreffen, was meistens der Fall ist, oder kartenweiten Einfluss haben. Um zu bestimmen, welches Schiff das Ereigniss betrifft, wird jedem Schiff bei Erstellung/Kauf eine fortlaufende Zahl zugewiesen. Durch würfeln mit einem Würfel für den \[\text{Anzahl Seiten Würfel} \leqslant \text{Anzahl Schiffe}\] gilt.
+
+\begin{expbox}
+	\exphead{Flaute}
+	\medskip
+
+	\noindent \textit{Die Segel erschlaffen, es ist Zeit das Schiff auf Vordermann zu bringen und die Rumfässer zu leeren: Eine Flaute macht sich breit.}\\
+	Ein ausgewürfeltes Schiff kann in dieser Runde nicht die Aktion \emph{Segeln} wählen.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Segelschaden}
+	\medskip
+
+	\noindent \textit{}\\
+	Ein ausgewürfeltes Schiff setzt für diese Runde aus.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Hurrikan}
+	\medskip
+
+	\noindent \textit{Am Horizont bildet sich eine rießige, finstere Wolkenkonstellation. Ein starker Wind und Regen kommen auf. Das Meer raut in zunehmender Geschwindigkeit auf. Ein Hurrikan nähert sich!}\\
+	Das betroffene Schiff wird auf das erwürfelte Feld versetzt. Dieses Ereignis hat keine Wirkung, wenn sich das Schiff an einem Hafen befindet.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Skorbut}
+	\medskip
+
+	\noindent \textit{Es ist schon lange her, dass die Matrosen frische Südfrüchte verspeist haben.}
+
+	\noindent Für das betroffene Schiff darf ausgesucht werden, welches Besatzungsmitglied verloren wird. Durch die Abgabe von einmal Südfrüchten oder einmal Medizin, kann dieser Effekt nullifiziert werden.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Meuterei}
+	\medskip
+
+	\noindent \textit{Die Besatzung ist nicht mit ihrem Kapitän einverstanden und versammelt sich lauthals vor der Kapitänskajüte.}
+
+	\noindent Die Fähigkeiten der gesamten Besatzung werden für zwei Runden ausgesetzt.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Kraken}
+	\medskip
+
+	\noindent \textit{Gigantische Luftblasen zerbersten die Meeresoberfläche und düstere Tentakel halten Ausschau nach unachtsamen Matrosen.}\\
+	Ein \(7 \times 7\) Felder großes Feld Bei dieser Ereigniskarte wird zunächst einer der Quadranten A, B, C, D, in dem der Kraken auftaucht, durch einen W4 bestimmt. Dann verschiebt sich seine Position auf ein weiteres, zufällig ausgewähltes Feld, ausgewählt durch 2W20 erst für Breiten- und dann für den Längengrad innerhalb des Quadranten. Für jede Runde, in der ein Schiff in der Krakenzone ist, muss es sich ein Feuergefecht mit dem Kraken liefern. Der Kraken hat folgende Eigenschaften:
+	\begin{description}
+		\item[Leben (Gesamtwandstärke):] 30
+		\item[Gesamtschaden:] Ein Viertel der Summe aller Kanonenschäden des Schiffes.
+	\end{description}
+	In diesem Kampf kann mit jeder Teilseite geschossen werden. Hierbei wird der Distanzrang durch die Distanzringe angegeben, AUF denen eine Teilseite liegt. Von Innen nach Außen entsprechen die Distanzringe den Distanzrängen 0, 1 und 2. Der Kraken greift immer mit dem Distanzrang an, der durch den niedrigsten Distanzring angegeben wird.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Pulverfassexplosion}
+	\medskip
+
+	\noindent \textit{Den Smutje mit der Ladungssicherung zu beauftragen war keine gute Idee: Eine alte Öllampe fällt zu Boden und rollt in Richtung eines undichten Pulverfasses.}
+
+\end{expbox}
+
+\section{Datenblätter}\label{data}
+
+\subsection{Schiffe}\label{sbscSchiffe}
+
+\newpage
+
+\subsubsection{Schaluppe}
+
+\begin{tikzpicture}
+    % Draw the hull shape
+    \draw[thick] (0,0) -- (1,-3) -- (1.5,-6) -- (0,-9) -- (-1.5,-6) -- (-1,-3) -- cycle;
+
+    % Add numbers
+    \node at (0, 0.5) {4/2}; % Front
+    \node at (-2, -5) {1/1}; % Left
+    \node at (2, -5) {1/1};  % Right
+    \node at (0, -9.5) {1/1}; % Back
+\end{tikzpicture}
+\begin{tikzpicture}
+    % Draw the hull shape using smooth curves
+    \draw[thick]
+        (0,0)
+        .. controls (1.5,-3) and (1.5,-6) .. (0,-9) % Right side
+        .. controls (-1.5,-6) and (-1.5,-3) .. (0,0) % Left side
+        -- cycle;
+
+    % Add numbers
+    \node at (0, 0.5) {4/2}; % Front
+    \node at (-2, -5) {1/1}; % Left
+    \node at (2, -5) {1/1};  % Right
+    \node at (0, -9.5) {1/1}; % Back
+\end{tikzpicture}
+
+\newpage
+
+\subsubsection{Kanonenboot}
+
+\begin{minipage}[t]{0.6\textwidth} % Left side for text
+    This is the main text of your document. It will start from the top-left corner and flow down the page while leaving space for the figure on the right.
+
+    You can write I am quite sure, you can multiple paragraphs here, and the figure will remain positioned at the top-right corner of the page. here,
+    and the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at t
+    he top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and
+     the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
+     top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and t
+     he figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the t
+     op-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and t
+     he figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
+     top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and
+     the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
+      top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page.
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.35\textwidth} % Right side for the figure
+    \vspace{0pt}
+%\begin{pspicture}(0,0)(5,10)
+%    %\psaxes{->}(0,0)(0,0)(5,9)
+%    \psgrid(0,0)(0,0)(5,10)
+%    \pcline[linewidth=1pt]{-}(1.487,1)(3.5,1)
+%    \pscurve[linewidth=1pt]{-}(1.5,1)(1.4,1.2)(1.24,1.6)(1.14,2)(1.065,2.4)(1.04,2.6)(1,3)(1,3.05)
+%    \pscurve[linewidth=1pt]{-}(3.5,1)(3.6,1.2)(3.76,1.6)(3.86,2)(3.935,2.4)(3.96,2.6)(4,3)(4,3.05)
+%    \pcline[linewidth=1pt]{-}(1,3)(1,7)
+%    \pcline[linewidth=1pt]{-}(4,3)(4,7)
+%    \pscurve[linewidth=1pt]{-}(1,6.95)(1,7)(1.04,7.3)(1.1,7.55)(1.25,8)(1.44,8.4)(1.6,8.66)(1.84,9)(2,9.2)(2.3,9.52)(2.5,9.7)
+%    \pscurve[linewidth=1pt]{-}(4,6.95)(4,7)(3.96,7.3)(3.9,7.55)(3.75,8)(3.56,8.4)(3.4,8.66)(3.16,9)(3,9.2)(2.7,9.52)(2.5,9.7)
+%\end{pspicture}
+\begin{tikzpicture}
+    \draw[thick] plot[smooth] coordinates {(1.487,1)(3.5,1)};
+    \draw[thick] plot[smooth] coordinates {(1.5,1)(1.4,1.2)(1.24,1.6)(1.14,2)(1.065,2.4)(1.04,2.6)(1,3)(1,3.05)};
+    \draw[thick] plot[smooth] coordinates {(3.5,1)(3.6,1.2)(3.76,1.6)(3.86,2)(3.935,2.4)(3.96,2.6)(4,3)(4,3.05)};
+    \draw[thick] plot[smooth] coordinates {(1,3)(1,7)};
+    \draw[thick] plot[smooth] coordinates {(4,3)(4,7)};
+    \draw[thick] plot[smooth] coordinates {(1,6.95)(1,7)(1.04,7.3)(1.1,7.55)(1.25,8)(1.44,8.4)(1.6,8.66)(1.84,9)(2,9.2)(2.3,9.52)(2.5,9.7)};
+    \draw[thick] plot[smooth] coordinates {(4,6.95)(4,7)(3.96,7.3)(3.9,7.55)(3.75,8)(3.56,8.4)(3.4,8.66)(3.16,9)(3,9.2)(2.7,9.52)(2.5,9.7)};
+\end{tikzpicture}
+\end{minipage}
+
+\newpage
+
+\subsubsection{Galeone}
+
+\newpage
+
+\subsubsection{Fregatte}
+
+\newpage
+
+\subsubsection{Frachtschiff}
+
+\newpage
+
+\subsubsection{Schlachtkahn}
+
+\newpage
+
+\subsection{Schiffskauf -- Übersicht}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|g|c|}\hline
+        \textbf{Schiff} & \textbf{Holz} & \textbf{Leinen} & \textbf{Eisen} & \textbf{Gold} & \textbf{Preis} & \textbf{Benötigtes Lager}\\ \hline\hline
+        Schaluppe    & 2 & 1 & 1 & -- & 30  & 4 \\ \hline
+        Kanonenboot  & 1 & 1 & 2 & -- & 42  & 4 \\ \hline
+        Galeone      & 2 & 1 & 3 & -- & 58  & 6 \\ \hline
+        Fregatte     & 1 & 1 & 4 & -- & 70  & 6 \\ \hline
+        Frachtschiff & 5 & 2 & 3 & -- & 76  & 10 \\ \hline
+        Schlachtkahn & 8 & 4 & 5 & 1  & 164 & 18 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Besatzung}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|c|c|l|}\hline
+        \textbf{Mitglied} & \textbf{Leben} & \textbf{Preis} & \textbf{Effekt} \\ \hline\hline
+        Steuermann   & 4 & 75 & \(-1\) Wendekosten \\ \hline
+        Matrose      & 4 & 20 & +1 Wind in jede Richtung\\ \hline
+        Smutje       & 4 & 10 & \\ \hline
+        Hexe         & 7 & 5  & Darf einen Würfel umdrehen \\ \hline
+        Kanonier     & 4 & 50 & +1 Kanonenreichweite \\ \hline
+        Pirat & 1 & 10 & +1 Kleiner Würfel \\ \hline
+        Söldner      & 2 & 30 & +1 Mittlerer Würfel \\ \hline
+        Seebär       & 4 & 70 & +1 Großer Würfel \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Kanonen}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|c|c||c|c|}\hline
+        \textbf{Kanone} & \textbf{Reichweite} & \textbf{Schaden} & \textbf{Roheisen} & \textbf{Goldnuggets}\\ \hline\hline
+        Seeklinge    & +1 & +0 & 1 & -- \\ \hline
+        Machtbrecher & +0 & +1 & 1 & -- \\ \hline
+        Dunkelkerker & +1 & +1 & 1 & 1 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Waren}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|g|y|R|c|}\hline
+        \textbf{Ware} & \textbf{Kaufpreis} & \textbf{Mangel-Verkauf} & \textbf{Krise-Verkauf} & \textbf{Max. Profit} \\ \hline\hline
+        Dschungelholz & 2  & 6  & 8  & 6 \\ \hline
+        Baumwolle     & 6  & 10 & 14 & 8 \\ \hline
+        Südfrüchte    & 8  & 14 & 18 & 10 \\ \hline
+        Leinentuch    & 12 & 18 & 24 & 12 \\ \hline
+        Roheisen      & 14 & 22 & 28 & 14 \\ \hline
+        Rumfass       & 20 & 28 & 36 & 16 \\ \hline
+        Medizin       & 24 & 34 & 42 & 18 \\ \hline
+        Goldnuggets   & 30 & 40 & 50 & 20 \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{document}
