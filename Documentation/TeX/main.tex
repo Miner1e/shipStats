@@ -2,6 +2,8 @@
 
 %\usepackage{lua-visual-debug}
 
+\usepackage{lipsum}
+
 \usepackage[lmargin=2.5cm, rmargin=2.5cm, top=3cm, bottom=3cm]{geometry}
 
 \usepackage[ngerman]{babel}
@@ -56,6 +58,9 @@
 \usepackage{xparse}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
+
+\usepackage{tabularray}
+\UseTblrLibrary{siunitx, booktabs}
 \usepackage{tikz}
 %\usepackage{pst-all}
 \usepackage{romannum}
@@ -124,7 +129,7 @@
 
 \section{Spielanleitung}
 
-Ein Zug ist jede Permutation der Aktionen \emph{Segeln}, \emph{Handeln}, \emph{Schiff kaufen}, \emph{Tauschen}, \emph{Bergen} und \emph{Kämpfen}.
+Ein \deph{Zug} ist jede Permutation der \deph{Aktionen} \emph{Segeln}, \emph{Handeln}, \emph{Schiff kaufen}, \emph{Tauschen}, \emph{Bergen} und \emph{Kämpfen}.
 
 \subsection{Segeln}
 
@@ -149,7 +154,7 @@ Nun gibt es mehrere Möglichkeiten, wie man sich bewegen kann:
     \exphead{In eine Richtung segeln}
     \medskip
 
-    \noindent Hierfür wählt man erst eine der 8 möglichen Himmelsrichtungen, ermittelt die Windeseifer und setzt sein Schiff dann maximal so viele
+    \noindent Hierfür wählt man erst eine der \num{8} möglichen Himmelsrichtungen, ermittelt die Windeseifer und setzt sein Schiff dann maximal so viele
     Felder in diese Richtung weiter.\par
     Die Aktion \emph{Segeln} ist beendet.
 \end{expbox}
@@ -159,7 +164,7 @@ Nun gibt es mehrere Möglichkeiten, wie man sich bewegen kann:
     \medskip
 
     \noindent Man sucht sich die Segel- und Windstärke aus, die die größte Windeseifer ergeben und kann sich dann in \textbf{\qty{90}{\degree}} Schritten % Boldfont funktioniert mit qty nicht
-    auf der Stelle wenden. Eine Wendung kostet den Parameter \textbf{Wendigkeit} an Windeseifer. Die Windeseifer darf wenigstens 0 werden.\par
+    auf der Stelle wenden. Eine Wendung kostet den Parameter \textbf{Wendigkeit} an Windeseifer. Die Windeseifer darf wenigstens \num{0} werden.\par
     Die Aktion \emph{Segeln} ist beendet.
 \end{expbox}
 
@@ -172,9 +177,9 @@ Nun gibt es mehrere Möglichkeiten, wie man sich bewegen kann:
     \enquote{Auf der Stelle wenden}. Die Anzahl an Wendungen, multipliziert mit dem Parameter Wendigkeit und dann von der Windeseifer subtrahiert ergibt die Windeseifer, welche nun zum Segeln in eine Richtung zur Verfügung steht. Jetzt kann man also
     segeln und dann wie überlegt wenden.\par
     Beispiel: \(\text{Segelstärke} = 4, \text{Windstärke} = 3, \text{Windeseifer} = 4 + 3 = 7, \text{Wendigkeit} = 2\)
-    Möchte man nun \(1\times\) wenden verbraucht man dafür 2 Windeseifer, kann also davor nur noch 5 Felder in eine Richtung fahren.
-    Oder man könnte sich auch um 180° drehen, also \(3\times\) und dafür 6 Windeseifer benötigen, und somit davor noch höchstens
-    1 Feld weit fahren.\par
+    Möchte man nun \(1\times\) wenden verbraucht man dafür \num{2} Windeseifer, kann also davor nur noch \num{5} Felder in eine Richtung fahren.
+    Oder man könnte sich auch um \qty{180}{\degree} drehen, also \(3\times\) und dafür \num{6} Windeseifer benötigen, und somit davor noch höchstens
+    \num{1} Feld weit fahren.\par
     Die Aktion \emph{Segeln} ist beendet.
 \end{expbox}
 
@@ -223,29 +228,35 @@ dafür sehen sollte.
     \exphead{Reichweite}
     \medskip
 
-    \noindent Eine Kanone hat eine \deph{Reichweite} von \textbf{3} zum eigenen Schiff anliegenden Feldern. Dies gilt nur für die Richtungen,
+    \noindent Eine Kanone hat eine \deph{Reichweite} von \textbf{zwei} zum eigenen Schiff anliegenden Feldern. Dies gilt nur für die Richtungen,
     in die die Kanonen ausgerichtet sind, also Bug, Heck, Backbord und Steuerbord. Nur diagonal kann also nicht geschossen werden.
+\end{expbox}
+
+\begin{expbox}
+	\exphead{Teilseite}
+	\medskip
+
+	\noindent Eine Teilseite bezeichnet den Teil einer der vier kampffähigen Seiten eines Schiffes, der genau ein Feld auf dem Spielfeld lang ist. Demnach ist der Bug und das Heck immer eine Teilseite. Die Klasse eines Schiffes gibt Aufschluss darüber, aus wie vielen Teilseiten eine Seite höchstens besteht. So bestehen Back- und Steuerbord eines Schlachtkahns der Klasse \Romannum{3} aus jeweils \num{3} Teilseiten.
 \end{expbox}
 
 \begin{expbox}
     \exphead{Munition}
     \medskip
 
-    \noindent Um einen Schuss abzugeben, benötigt man pro Kanone eine Munitionseinheit. Gefeuert wird pro Seite, sodass auch mehrere
-    Einheiten verschossen werden können. Munition muss gekauft werden. Schrotmunition macht einfachen Schaden, Kugelmunition doppelten.
+    \noindent Um einen Schuss abzugeben, benötigt man pro Kanone eine Munitionseinheit. Gefeuert wird immer pro Teilseite, sodass mehrere Einheiten verschossen werden. Munition muss gekauft werden. Schrotmunition macht einfachen Schaden, Kugelmunition doppelten.
 \end{expbox}
 
 \begin{expbox}
 	\exphead{Distanzrang}
 	\medskip
 
-	\noindent Schiffe können sich nur in ein Feuergefecht begeben, wenn mindestens ein Distanzrang 0 existiert. Da Schiffe der \hyperref[data]{Klassen} \Romannum{2} \& \Romannum{3} zwei oder drei Felder lang sind, müssten Teile der Kanonen bei den längeren Schiffen diagonal schießen. Um dies nachzuempfinden gibt es Sonderregeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen. Dazu wird der Distanzrang eingeführt, der drei Stufen haben kann und die sich wie folgt ergeben:
+	\noindent Schiffe können sich nur in ein Feuergefecht begeben, wenn mindestens ein Distanzrang 0 existiert. Da Schiffe der \hyperref[data]{Klassen} \Romannum{2} \& \Romannum{3} \num{2} oder \num{3} Felder lang sind, müssen manche Kanonen bei diesen langen Schiffen diagonal schießen. Um dies darzustellen gibt es bestimmte Regeln, falls sich nur eine oder zwei Teilseiten direkt gegenüberstehen. Dazu wird der Distanzrang eingeführt, welcher sich in drei Stufen untergliedert. Er ergibt sich wie folgt:
 	\begin{description}
-		\item[Rang 0:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels sind 0 Felder.
-		Hier gilt volle Trefferwahrscheinlichekeit und bei den Werten \epsdice{3} \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
-		\item[Rang 1:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels ist 1 Feld.
+		\item[Rang \(\symbf{0}\):] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels beträgt \num{0} Felder.
+		Hier gilt volle Trefferwahrscheinlichkeit und bei den Werten \epsdice{3} \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
+		\item[Rang \(\symbf{1}\):] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels beträgt \num{1} Feld.
 		Hier gilt verringerte Trefferwahrscheinlichkeit und bei den Werten \epsdice{4} \epsdice{5} \epsdice{6} wird getroffen.
-		\item[Rang 2:] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels sind 2 Felder.
+		\item[Rang \(\symbf{2}\):] Die Verschiebung zwischen einer Teilseite, die eine Salve abgeben soll und der nächstgelegenen Teilseite des Ziels beträgt \num{2} Felder.
 		Hier gilt die geringste Trefferwahrscheinlichkeit und nur bei den Werten \epsdice{5} oder \epsdice{6} wird getroffen.
 	\end{description}
 \end{expbox}
@@ -254,20 +265,19 @@ dafür sehen sollte.
     \exphead{Schaden ermitteln}
     \medskip
 
-	\noindent Eine Teilseite sind Bug, Heck sowie Back- und Steuerbord, die aus so vielen gleichlangen Teilseiten bestehen, wie durch die Klasse des Schiffes angegeben werden.
-	Eine Breitseite besteht aus mehreren Salven, wobei eine Salve das Schießen einzelner Teilseiten repräsentiert.
+	\noindent Eine Breitseite besteht aus mehreren Salven, wobei eine Salve das Schießen einzelner Teilseiten repräsentiert.
     \begin{description}
     	\item[Kanonenschaden:] Dieser Schaden ergibt sich als Summe aus allen Werten, die Schaden für eine einzelne Kanone erhöhen können. Das sind die Art der Kanone selbst und die genutzte Munition. Hypothetischer Schaden, der als Grundlage der Berechnung für den Salvenschaden (den tatsächlichen Schaden) dient.
     	\item[Salvenschaden:] Eine Salve ist der Akt des Schießens einer Teilseite
     	\[
-    	\mathrm{DMG} = \begin{cases}
+    	\text{Schaden} = \begin{cases}
     		0 & \text{Salve trifft nicht}\\
     		\text{Summe aller Kanonenschäden dieser Teilseite.} & \text{Salve trifft}
     	\end{cases}
     	\]
     	\item[Gesamtschaden:] Dies ist die Summe aller Salvenschäden.
     \end{description}
-    Jetzt wird der Gesamtschaden von der Wandstärke der beschossenen Seite abgezogen. Fällt die Wandstärke einer Seite auf 0, ist diese Breitseite zerstört, feuerunfähig und kann nur durch Reparatur (\autoref{sbsbscReparatur}) wieder einsatzfähig gemacht werden.
+    Jetzt wird der Gesamtschaden von der Wandstärke der beschossenen Seite abgezogen. Fällt die Wandstärke einer Seite auf \num{0}, ist diese Breitseite zerstört, feuerunfähig und kann nur durch Reparatur (\autoref{sbsbscReparatur}) wieder einsatzfähig gemacht werden.
     Fällt die Gesamtwandstärke auf 0 ist das Schiff zerstört und kann nicht mehr repariert werden. Das Schiff wird dann mit einem Beuteplättchen, das zur Größe des entsprechenden Schiffes passt, unterlegt. Damit kann seine Ladung
     geborgen werden (\autoref{sbscBergen}).
 
@@ -297,7 +307,9 @@ Sobald ein Schiff beschädigt wurde kann es an einem Hafen repariert werden. Wir
 
 \subsection{Ereigniskarten}
 
-Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur ein Schiff betreffen, was meistens der Fall ist, oder kartenweiten Einfluss haben. Um zu bestimmen, welches Schiff das Ereigniss betrifft, wird jedem Schiff bei Erstellung/Kauf eine fortlaufende Zahl zugewiesen. Durch würfeln mit einem Würfel für den \[\text{Anzahl Seiten Würfel} \leqslant \text{Anzahl Schiffe}\] gilt.
+Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur ein Schiff betreffen, was meistens der Fall ist, oder kartenweiten Einfluss haben. Um zu bestimmen, welches Schiff das Ereignis betrifft, wird jedem Schiff bei Erstellung/Kauf eine fortlaufende Zahl zugewiesen. Durch würfeln mit einem Würfel für den \[\text{Anzahl Seiten Würfel} \leqslant \text{Anzahl Schiffe}\] gilt, wird bestimmt, welches Schiff getroffen wird.
+
+Mögliche Ereignisse sind:
 
 \begin{expbox}
 	\exphead{Flaute}
@@ -311,7 +323,7 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\exphead{Segelschaden}
 	\medskip
 
-	\noindent \textit{}\smallskip\\
+	\noindent \textit{Eine kräftige Böe fährt ins Hauptsegel -- zu kräftig. Die Matrosen können nur dabei zusehen, wie der Stoff zu Boden geht. Von Flüchen durchdrungene Luft kennzeichnet die Flickarbeiten. Sobald sie fertig sind, müssen sie nur noch hoffen, dass sie es damit bis in den nächstbesten Hafen schaffen.}\smallskip\\
 	Ein ausgewürfeltes Schiff kann in dieser Runde nur mit halber Geschwindigkeit fahren. Es wird stets abgerundet.
 \end{expbox}
 
@@ -344,12 +356,12 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\medskip
 
 	\noindent \textit{Gigantische Luftblasen zerbersten die Meeresoberfläche und düstere Tentakel halten Ausschau nach unachtsamen Matrosen.}\smallskip\\
-	Ein \(7 \times 7\) Felder großes Feld Bei dieser Ereigniskarte wird zunächst einer der Quadranten A, B, C, D, in dem der Kraken auftaucht, durch einen W4 bestimmt. Dann verschiebt sich seine Position auf ein weiteres, zufällig ausgewähltes Feld, ausgewählt durch 2W20 erst für Breiten- und dann für den Längengrad innerhalb des Quadranten. Für jede Runde, in der ein Schiff in der Krakenzone ist, muss es sich ein Feuergefecht mit dem Kraken liefern. Der Kraken hat folgende Eigenschaften:
+	Ein \(7 \times 7\) Felder großes Feld Bei dieser Ereigniskarte wird zunächst einer der Quadranten A, B, C, D, in dem der Kraken auftaucht, durch einen W4 bestimmt. Dann verschiebt sich seine Position auf ein weiteres, zufällig ausgewähltes Feld, ausgewählt durch \num{2}W\num{20} erst für Breiten- und dann für den Längengrad innerhalb des Quadranten. Für jede Runde, in der ein Schiff in der Krakenzone ist, muss es sich ein Feuergefecht mit dem Kraken liefern. Der Kraken hat folgende Eigenschaften:
 	\begin{description}
-		\item[Leben (Gesamtwandstärke):] 30
+		\item[Leben (Gesamtwandstärke):] \num{30}
 		\item[Gesamtschaden:] Ein Viertel der Summe aller Kanonenschäden des Schiffes.
 	\end{description}
-	In diesem Kampf kann mit jeder Teilseite geschossen werden. Hierbei wird der Distanzrang durch die Distanzringe angegeben, AUF denen eine Teilseite liegt. Von Innen nach Außen entsprechen die Distanzringe den Distanzrängen 0, 1 und 2. Der Kraken greift immer mit dem Distanzrang an, der durch den niedrigsten Distanzring angegeben wird.
+	In diesem Kampf kann mit jeder Teilseite geschossen werden. Hierbei wird der Distanzrang durch die Distanzringe angegeben, AUF denen eine Teilseite liegt. Von Innen nach Außen entsprechen die Distanzringe den Distanzrängen \num{0}, \num{1} und \num{2}. Der Kraken greift immer mit dem Distanzrang an, der durch den niedrigsten Distanzring angegeben wird.
 \end{expbox}
 
 \begin{expbox}
@@ -357,13 +369,13 @@ Jede Runde wird eine neue Ereigniskarte aufgedeckt. Eine Ereigniskarte kann nur 
 	\medskip
 
 	\noindent \textit{Den Smutje mit der Ladungssicherung zu beauftragen war keine gute Idee: Eine alte Öllampe fällt zu Boden und rollt in Richtung eines undichten Pulverfasses.}\smallskip\\
-	
+
 \end{expbox}
 
 \begin{expbox}
 	\exphead{Schatz}
 	\medskip
-	
+
 	\noindent Schiffe
 	\begin{description}
 		\item[Gute Schiffsplanken:] Diese können zu einem beliebiegen Zeitpunkt verwendet werden um das Schiff vollständig zu reparieren.
@@ -385,7 +397,7 @@ Erreicht ein Spieler eines der Spielziele, endet das Spiel sofort und dieser Spi
 \begin{expbox}
 	\exphead{Flottenadmiral}
 	\medskip
-	
+
 	\noindent \textit{Ein wagemutiger Kapitän hat sich eine mächtige Flotte aufgebaut. Damit hat er sich den Thron der See gesichert.}\smallskip\\
 	Um die Flottengröße \(F\) zu ermitteln, wird die Klasse \(K\) jedes Schiffes, das zur Flotte \(\Phi\) gehört, addiert. Sobald die Flottengröße \num{15} erreicht, ist das Spielziel erreicht. \[ F = \sum_{i \in {\Phi}} K_i \geqslant 15 \implies \text{Sieg}\]
 \end{expbox}
@@ -393,9 +405,9 @@ Erreicht ein Spieler eines der Spielziele, endet das Spiel sofort und dieser Spi
 \begin{expbox}
 	\exphead{Handelskapitän}
 	\medskip
-	
+
 	\noindent \textit{Ein gewitzter Seefahrer}\smallskip\\
-	
+
 \end{expbox}
 
 \section{Datenblätter}\label{data}
@@ -436,23 +448,11 @@ Erreicht ein Spieler eines der Spielziele, endet das Spiel sofort und dieser Spi
 \subsubsection{Kanonenboot}
 
 \begin{minipage}[t]{0.6\textwidth} % Left side for text
-    This is the main text of your document. It will start from the top-left corner and flow down the page while leaving space for the figure on the right.
-
-    You can write I am quite sure, you can multiple paragraphs here, and the figure will remain positioned at the top-right corner of the page. here,
-    and the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at t
-    he top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and
-     the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
-     top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and t
-     he figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the t
-     op-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and t
-     he figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
-     top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page. here, and
-     the figure will remain positioned at the top-right corner of the page. here, and the figure will remain positioned at the
-      top-right corner of the page. here, and the figure will remain positioned at the top-right corner of the page.
+   \lipsum[1-3]
     \end{minipage}%
     \hfill
     \begin{minipage}[t]{0.35\textwidth} % Right side for the figure
-    \vspace{0pt}
+    \vspace{00pt}
 %\begin{pspicture}(0,0)(5,10)
 %    %\psaxes{->}(0,0)(0,0)(5,9)
 %    \psgrid(0,0)(0,0)(5,10)
@@ -496,64 +496,98 @@ Erreicht ein Spieler eines der Spielziele, endet das Spiel sofort und dieser Spi
 \subsection{Schiffskauf -- Übersicht}
 
 \begin{table}[!h]
-    \centering
-    \begin{tabular}{|l|c|c|c|c|g|c|c|}\hline
-        \textbf{Schiff} & \textbf{Holz} & \textbf{Leinen} & \textbf{Eisen} & \textbf{Gold} & \textbf{Preis} & \textbf{Rep.-Preis} & \textbf{Benötigtes Lager}\\ \hline\hline
-        Schaluppe    & 2 & 1 & 1 & -- & 30  & 15 & 4  \\ \hline
-        Kanonenboot  & 1 & 1 & 2 & -- & 42  & 21 & 4  \\ \hline
-        Galeone      & 2 & 1 & 3 & -- & 58  & 29 & 6  \\ \hline
-        Fregatte     & 1 & 1 & 4 & -- & 70  & 35 & 6  \\ \hline
-        Frachtschiff & 5 & 2 & 3 & -- & 76  & 38 & 10 \\ \hline
-        Schlachtkahn & 8 & 4 & 5 & 1  & 164 & 82 & 18 \\ \hline
-    \end{tabular}
+	\centering
+	\begin{tblr}{
+			colspec={Q[l]*{4}{Q[si={table-format=1.0},c]}Q[si={table-format=3.0},c,Grün]*{2}{Q[si={table-format=2.0},c]}},
+			rowspec={*{7}{Q}},
+			row{1} = {font=\bfseries, guard}
+			}
+		\toprule
+		Schiff & Holz & Leinen & Eisen & Gold & Preis & Rep.-Preis & Benötigtes Lager \\
+		\midrule
+		Schaluppe    & 2 & 1 & 1 & {--} & 30  & 15 & 4  \\
+		Kanonenboot  & 1 & 1 & 2 & {--} & 42  & 21 & 4  \\
+		Galeone      & 2 & 1 & 3 & {--} & 58  & 29 & 6  \\
+		Fregatte     & 1 & 1 & 4 & {--} & 70  & 35 & 6  \\
+		Frachtschiff & 5 & 2 & 3 & {--} & 76  & 38 & 10 \\
+		Schlachtkahn & 8 & 4 & 5 & 1    & 164 & 82 & 18 \\
+		\bottomrule
+	\end{tblr}
 \end{table}
 
 \subsection{Besatzung}
 
 \begin{table}[!h]
-    \centering
-    \begin{tabular}{|l|c|c|l|}\hline
-        \textbf{Mitglied} & \textbf{Leben} & \textbf{Preis} & \textbf{Effekt/Beschreibung} \\ \hline\hline
-        Steuermann   & 4 & 75 & \(-1\) Wendekosten \\ \hline
-        Matrose      & 4 & 20 & \(+1\) Wind in die Richtung, in die der Wind dort negativ ist\\ \hline
-        Smutje       & 4 & 10 & \\ \hline
-        Hexe         & 7 & 5  & Darf einen Würfel umdrehen \\ \hline
-        Kanonier     & 4 & 50 & \(+1\) Kanonenreichweite \\ \hline
-        Pirat & 1 & 10 & \(+1\) Kleiner Würfel \\ \hline
-        Söldner      & 2 & 30 & \(+1\) Mittlerer Würfel \\ \hline
-        Seebär       & 4 & 70 & \(+1\) Großer Würfel \\ \hline \hline
-        Taucher      & 2 & 50 & Erlaubt es Schätze und gesunkene Schiffe zu \hyperref[sbscBergen]{bergen}.\\ \hline
-    \end{tabular}
+	\centering
+	\begin{tblr}{
+			colspec={Q[l]Q[si={table-format=1.0},c]Q[si={table-format=2.0},c]Q[l]},
+			rowspec={*{10}{Q}},
+			row{1} = {font=\bfseries, guard}
+			}
+		\toprule
+		Mitglied     & Leben & Preis & Effekt/Beschreibung. \\ \midrule
+		Steuermann   & 4 & 75 & \(-1\) Wendekosten. \\
+		Matrose      & 4 & 20 & \(+1\) Wind in die Richtung, in die der Wind dort negativ ist. \\
+		Smutje       & 4 & 10 & \\
+		Hexe         & 7 & 5  & Darf einen Würfel umdrehen. \\
+		Kanonier     & 4 & 50 & \(+1\) Kanonenreichweite. \\
+		Pirat        & 1 & 10 & \(+1\) Kleiner Würfel. \\
+		Söldner      & 2 & 30 & \(+1\) Mittlerer Würfel. \\
+		Seebär       & 4 & 70 & \(+1\) Großer Würfel. \\
+		\midrule
+		Taucher      & 2 & 50 & Erlaubt es Schätze und gesunkene Schiffe zu \hyperref[sbscBergen]{bergen}. \\
+		\bottomrule
+	\end{tblr}
 \end{table}
 
 \subsection{Kanonen}
 
 \begin{table}[!h]
-    \centering
-    \begin{tabular}{|l|c|c||c|c|}\hline
-        \textbf{Kanone} & \textbf{Reichweite} & \textbf{Schaden} & \textbf{Roheisen} & \textbf{Goldnuggets}\\ \hline\hline
-        Seeklinge    & +0 & +0 & 0 & -- \\ \hline
-        Rumpfbrecher & +0 & +1 & 1 & -- \\ \hline
-        Dunkelkerker & +1 & +0 & 1 & -- \\ \hline
-        Plankenschänder  & +1 & +1 & 1 & 1  \\ \hline
-    \end{tabular}
+	\centering
+	\begin{tblr}{
+			colspec={Q[l]*{4}{Q[si={table-format=1.0},c]}},
+			rowspec={*{5}{Q}},
+			row{1} = {font=\bfseries, guard}
+			}
+		\toprule
+		Kanone & Reichweite & Schaden & Roheisen & Goldnuggets\\
+		\midrule
+		Seeklinge        & 2 & 1 & {--} & {--} \\
+		Rumpfbrecher     & 2 & 2 & 1 & {--} \\
+		Dunkelkerker     & 3 & 1 & 1 & {--} \\
+		Plankenschänder  & 3 & 2 & 1 & 1 \\
+		\bottomrule
+	\end{tblr}
 \end{table}
+
+\newpage
+
+\newgeometry{lmargin=2cm, rmargin=2cm, top=3cm, bottom=3cm}
 
 \subsection{Waren}
 
 \begin{table}[!h]
-    \centering
-    \begin{tabular}{|l|g|y|R|c|c|}\hline
-        \textbf{Ware} & \textbf{Kaufpreis} & \textbf{Mangel-Verkauf} & \textbf{Krise-Verkauf} & \textbf{Min. Profit} & \textbf{Max. Profit} \\ \hline\hline
-        Dschungelholz & 2  & 6  & 8  & 4  & 6  \\ \hline
-        Baumwolle     & 6  & 10 & 14 & 4  & 8  \\ \hline
-        Südfrüchte    & 8  & 14 & 18 & 6  & 10 \\ \hline
-        Leinentuch    & 12 & 18 & 24 & 6  & 12 \\ \hline
-        Roheisen      & 14 & 22 & 28 & 8  & 14 \\ \hline
-        Rumfass       & 20 & 28 & 36 & 8  & 16 \\ \hline
-        Medizin       & 24 & 34 & 42 & 10 & 18 \\ \hline
-        Goldnuggets   & 30 & 40 & 50 & 10 & 20 \\ \hline
-    \end{tabular}
+	\centering
+	\begin{tblr}{
+			colspec={Q[l]Q[si={table-format=2.0}, c, Grün]Q[si={table-format=2.0}, c, Gelb]Q[si={table-format=2.0}, c, Rot]*{2}{Q[si={table-format=2.0},c]}},
+			rowspec={*{9}{Q}},
+			row{1} = {font=\bfseries, guard}
+			}
+		\toprule
+		Ware & Kaufpreis & Mangel-Verkauf & Krise-Verkauf & Min. Profit & Max. Profit \\
+		\midrule
+		Dschungelholz & 2  & 6  & 8  & 4  & 6  \\
+		Baumwolle     & 6  & 10 & 14 & 4  & 8  \\
+		Südfrüchte    & 8  & 14 & 18 & 6  & 10 \\
+		Leinentuch    & 12 & 18 & 24 & 6  & 12 \\
+		Roheisen      & 14 & 22 & 28 & 8  & 14 \\
+		Rumfass       & 20 & 28 & 36 & 8  & 16 \\
+		Medizin       & 24 & 34 & 42 & 10 & 18 \\
+		Goldnuggets   & 30 & 40 & 50 & 10 & 20 \\
+		\bottomrule
+	\end{tblr}
 \end{table}
+
+\restoregeometry
 
 \end{document}
